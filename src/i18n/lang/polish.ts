@@ -5,7 +5,7 @@ export default {
     lang_name: "Polski",
     lang_name_english: "Polish",
     app: {
-        name: "RSO/Chat"
+        name: "APSI app"
     },
     login_screen: {
         sign_invite: "Zaloguj się",
