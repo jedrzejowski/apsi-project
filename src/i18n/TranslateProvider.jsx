@@ -1,5 +1,5 @@
 import * as React from "react";
-import Languages from "./lang/index";
+import Languages from "./lang";
 import noop from "../lib/noop";
 
 export const LanguageContext = React.createContext({

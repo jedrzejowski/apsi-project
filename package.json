@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "build": "webpack --mode production",
-        "dev-build": "webpack --mode development --watch"
+        "dev-build": "webpack --mode development --watch",
+        "dev-server": "node dev-server.js"
+        "dev-server": "node dev-server.js"
     },
     "author": "",
     "license": "ISC",
@@ -42,6 +44,7 @@
     },
     "dependencies": {
         "@types/winston": "^2.4.4",
+        "express": "^4.17.1",
         "winston": "^3.2.1",
         "yup": "^0.28.3"
     }
