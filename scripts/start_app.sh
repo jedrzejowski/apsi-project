@@ -1,3 +1,6 @@
 #!/bin/bash
 
-npm run /var/dashboard_frontend/dev-server.js
+old_dir=$(pwd)
+cd /var/dashboard_frontend/
+npm run dev-server
+cd old_dir
