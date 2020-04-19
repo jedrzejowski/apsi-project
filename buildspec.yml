@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      java: nodejs: 12.x
+  build:
+    commands:
+      - npm install
+      - npm build
+artifacts:
+  files:
+    - dev-server.js
+    - dist/*
+    - appspec.yml
+    - scripts/*
+  discard-paths: no

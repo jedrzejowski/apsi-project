@@ -1,0 +1,14 @@
+[Unit]
+Description=SmartThings Dashobard Frontend service
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=ubuntu
+ExecStart=/bin/bash /var/dashboard_frontend/start_app.sh
+
+[Install]
+WantedBy=multi-user.target
