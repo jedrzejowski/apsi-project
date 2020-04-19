@@ -8,6 +8,7 @@ phases:
     commands:
       - npm install
       - npm run build
+      - ls -l
 artifacts:
   files:
     - dev-server.js
