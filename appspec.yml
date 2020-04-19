@@ -9,6 +9,12 @@ files:
     destination: /etc/systemd/system/
   - source: scripts/start_app.sh
     destination: /var/dashboard_frontend/
+  - source: package.json
+    destination: /var/dashboard_frontend/
+  - source: package-lock.json
+    destination: /var/dashboard_frontend/
+  - source: node_modules
+    destination: /var/dashboard_frontend/node_modules/
 hooks:
   BeforeInstall:
     - location: scripts/install_dependencies.sh

@@ -10,8 +10,10 @@ phases:
       - npm run build
 artifacts:
   files:
+    - ./*
     - dev-server.js
     - dist/**/*
     - appspec.yml
     - scripts/*
+    - node_modules/**/*
   discard-paths: no
