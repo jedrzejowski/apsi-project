@@ -7,7 +7,6 @@
         "build": "webpack --mode production",
         "dev-build": "webpack --mode development --watch",
         "dev-server": "node dev-server.js"
-        "dev-server": "node dev-server.js"
     },
     "author": "",
     "license": "ISC",
