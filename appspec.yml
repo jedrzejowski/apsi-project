@@ -3,7 +3,7 @@ os: linux
 files:
   - source: dist/
     destination: /var/dashboard_frontend/
-  - source: scripts/smartthings_dashboard.service
+  - source: scripts/dashboard_frontend.service
     destination: /etc/systemd/system/
   - source: scripts/start_app.sh
     destination: /var/dashboard_frontend/
