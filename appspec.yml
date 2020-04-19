@@ -9,14 +9,14 @@ files:
     destination: /var/dashboard_frontend/
 hooks:
   BeforeInstall:
-    - location: install_dependencies.sh
+    - location: scripts/install_dependencies.sh
       timeout: 300
       runas: root
   ApplicationStart:
-    - location: start_server.sh
+    - location: scripts/start_server.sh
       timeout: 300
       runas: root
   ApplicationStop:
-    - location: stop_server.sh
+    - location: scripts/stop_server.sh
       timeout: 300
       runas: root
