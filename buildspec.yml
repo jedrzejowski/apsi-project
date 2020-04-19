@@ -8,13 +8,10 @@ phases:
     commands:
       - npm install
       - npm run build
-      - ls -l
-      - cd dist/
-      - ls -l
 artifacts:
   files:
     - dev-server.js
-    - dist/*
+    - dist/**/*
     - appspec.yml
     - scripts/*
   discard-paths: no
