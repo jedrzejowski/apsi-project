@@ -2,6 +2,8 @@ version: 0.0
 os: linux
 files:
   - source: dist/
+    destination: /var/dashboard_frontend/dist/
+  - source: dev-server.js
     destination: /var/dashboard_frontend/
   - source: scripts/dashboard_frontend.service
     destination: /etc/systemd/system/
