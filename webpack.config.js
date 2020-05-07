@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const clientConfig = {
     target: "web",
     entry: {
-        main: "./src/index.jsx"
+        main: "./src/index.tsx"
     },
     output: {
         filename: "[name].js",
@@ -13,13 +13,13 @@ const clientConfig = {
     },
     module: {
         rules: [{
-            test: /\.(ts|jsx)$/,
+            test: /\.(ts|tsx)$/,
             use: "ts-loader",
             exclude: /node_modules/,
         }]
     },
     resolve: {
-        extensions: [".ts", ".js", ".jsx", ".json"],
+        extensions: [".ts", ".tsx", ".js", ".json"],
     },
     plugins: [
         new HtmlWebpackPlugin({
