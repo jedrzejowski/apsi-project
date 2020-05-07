@@ -1,0 +1,33 @@
+version: 0.0
+os: linux
+files:
+  - source: dist/
+    destination: /var/dashboard_frontend/dist/
+  - source: dev-server.js
+    destination: /var/dashboard_frontend/
+  - source: scripts/dashboard_frontend.service
+    destination: /etc/systemd/system/
+  - source: scripts/start_app.sh
+    destination: /var/dashboard_frontend/
+  - source: package.json
+    destination: /var/dashboard_frontend/
+  - source: package-lock.json
+    destination: /var/dashboard_frontend/
+  - source: node_modules
+    destination: /var/dashboard_frontend/node_modules/
+hooks:
+  BeforeInstall:
+    - location: scripts/install_dependencies.sh
+      timeout: 300
+      runas: root
+    - location: scripts/remove_old_version.sh
+      timeout: 300
+      runas: root
+  ApplicationStart:
+    - location: scripts/start_server.sh
+      timeout: 300
+      runas: root
+  ApplicationStop:
+    - location: scripts/stop_server.sh
+      timeout: 300
+      runas: root
