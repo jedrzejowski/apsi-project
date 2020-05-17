@@ -1,7 +1,7 @@
 import {DataT} from "../types";
 import encodeQueryData from "./encodeQueryData";
 
-function appFetch(args: {
+export default function appFetch(args: {
     state: DataT.AppState,
     method: "GET",
     url: string,
@@ -17,20 +17,4 @@ function appFetch(args: {
         }),
         cache: "no-cache"
     })
-}
-
-export async function fetchDeviceList(state: DataT.AppState): Promise<DataT.DeviceShort[]> {
-    const response = await appFetch({
-        state,
-        method: "GET",
-        url: "/",
-        params: {}
-    });
-
-    if (response.status !== 200) {
-        throw new Error();
-    }
-
-    const {items} = await response.json();
-    return items;
 }

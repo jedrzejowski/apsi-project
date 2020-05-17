@@ -21,6 +21,9 @@ const clientConfig = {
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".json"],
     },
+    node: {
+        fs: "empty"
+    },
     plugins: [
         new HtmlWebpackPlugin({
             title: "APSI APP",

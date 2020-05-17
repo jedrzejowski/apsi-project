@@ -8,8 +8,10 @@ declare namespace DataT {
         backend_url: string,
         authorization: string,
 
-        deviceList?: DeviceShort[]
-        deviceMap?: Dictionary<Device>
+        current_page?: { type: string, id: string }
+
+        device_list?: DeviceShort[]
+        device_map?: Dictionary<DeviceDetails>
 
         next_notification_id?: number
         notification_dictionary?: Dictionary<Notification>
@@ -28,8 +30,50 @@ declare namespace DataT {
         deviceTypeId: string
     }
 
-    interface Device {
-
+    interface DeviceDetails {
+        "deviceId": string,
+        "app": {
+            "externalId": string,
+            "installedAppId": string,
+            "profile": {
+                "id": string
+            }
+        },
+        "childDevices": [
+            null
+        ],
+        "components": [
+            {
+                "capabilities": [
+                    {
+                        "id": string,
+                        "version": string
+                    }
+                ],
+                "id": string,
+                "label": string
+            }
+        ],
+        "deviceManufacturerCode": string,
+        "deviceNetworkType": string,
+        "deviceTypeId": string,
+        "deviceTypeName": string,
+        "dth": {
+            "completedSetup": boolean,
+            "deviceNetworkType": string,
+            "deviceTypeId": string,
+            "deviceTypeName": string,
+            "hubId": string,
+            "networkSecurityLevel": string
+        },
+        "label": string,
+        "locationId": string,
+        "name": string,
+        "profile": {
+            "id": string
+        },
+        "roomId": string,
+        "type": string
     }
 }
 
