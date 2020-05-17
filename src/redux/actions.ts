@@ -1,7 +1,7 @@
-import AppData from "./AppData";
+import {DataT} from "../types";
 
 export interface Actions {
-    NOTIFICATION_ADD: Partial<AppData.Notification>
+    NOTIFICATION_ADD: Partial<DataT.Notification>
     NOTIFICATION_REMOVE: string
 }
 
