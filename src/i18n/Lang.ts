@@ -19,6 +19,20 @@ export default interface Lang {
         name: string
         suffix: string
     },
+    component: {
+        delete_btn: {
+            dismiss: string
+            accept: string
+        }
+    },
+    page: {
+        device: {
+            delete_btn: {
+                confirm: string
+                label: string
+            }
+        },
+    }
     error_msg: {
         message_send_fail: string
     }

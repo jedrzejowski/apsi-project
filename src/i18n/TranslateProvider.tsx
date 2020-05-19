@@ -3,7 +3,6 @@ import Languages from "./lang/index";
 import Lang from "./Lang";
 import noop from "../lib/noop";
 
-
 export const LanguageContext = React.createContext<{
     language: Lang,
     setLanguage: (lang: Lang) => void

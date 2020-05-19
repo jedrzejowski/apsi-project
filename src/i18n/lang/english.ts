@@ -5,7 +5,7 @@ export default {
     lang_name: "English",
     lang_name_english: "English",
     app: {
-        name: "APSI app"
+        name: "SmartThings"
     },
     login_screen: {
         sign_invite: "Sign in",
@@ -20,6 +20,20 @@ export default {
         prefix: "Copyright ",
         name: "Zespół E",
         suffix: "."
+    },
+    page: {
+        device: {
+            delete_btn: {
+                label: "Delete device",
+                confirm: "Are u sure to delete device?"
+            }
+        },
+    },
+    component: {
+        delete_btn: {
+            accept: "Delete",
+            dismiss: "Cancel"
+        }
     },
     error_msg: {
         message_send_fail: "Error during message send"

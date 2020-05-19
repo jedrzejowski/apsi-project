@@ -12,7 +12,6 @@ import useTranslate from "../hooks/useTranslate";
 import noop from "../lib/noop";
 import Lang from "../i18n/Lang";
 
-
 export default function LanguageButton() {
 
     const translate = useTranslate();
