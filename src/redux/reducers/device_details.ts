@@ -6,7 +6,7 @@ import {NotificationLevel} from "../../lib/logger";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 
-function deviceDetailsSelector(state: DataT.AppState, device_id: string) {
+export function deviceDetailsSelector(state: DataT.AppState, device_id: string) {
     return state.device_map?.[device_id] ?? null;
 }
 
