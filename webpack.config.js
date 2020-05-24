@@ -29,6 +29,9 @@ const clientConfig = {
             title: "APSI APP",
             filename: "index.html",
             chunks: ["main"],
+            meta: {
+                viewport: "minimum-scale=1, initial-scale=1, width=device-width"
+            }
         })
     ]
 };

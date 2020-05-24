@@ -1,18 +1,16 @@
-import React, {useState} from "react";
+import React from "react";
 import {useDeviceList} from "../redux/reducers/device_list";
-import {ListItem} from "@material-ui/core";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import DeviceUnknownIcon from '@material-ui/icons/DeviceUnknown';
-import {Link as RouterLink} from 'react-router-dom';
 import {DataT} from "../types";
 import List from "@material-ui/core/List";
 import ListItemLink from "./lib/ListItemLink";
+import DeviceIcon from "./device/DeviceIcon";
 
 export default function AppLeftMenu() {
 
     const device_list = useDeviceList();
-
 
     return <div>
         <List>
@@ -32,8 +30,8 @@ function DeviceItem(props: {
 
     return <ListItemLink to={`/device/${props.device.deviceId}`}>
         <ListItemIcon>
-            <DeviceUnknownIcon/>
+            <DeviceIcon deviceId={props.device.deviceId}/>
         </ListItemIcon>
-        <ListItemText primary={props.device.label}/>
+        <ListItemText primary={props.device.name}/>
     </ListItemLink>
 }

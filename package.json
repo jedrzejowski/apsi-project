@@ -50,6 +50,7 @@
     "dependencies": {
         "@types/winston": "^2.4.4",
         "express": "^4.17.1",
+        "mdi-material-ui": "^6.15.0",
         "uuid": "^8.1.0",
         "winston": "^3.2.1",
         "yup": "^0.28.3"

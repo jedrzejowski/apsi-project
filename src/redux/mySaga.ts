@@ -11,5 +11,5 @@ let takeEvery = <Key extends keyof Actions>(name: Key, f: (action: Action<Key>) 
 
 export default function* mySaga() {
     yield takeLeading("DEVICE_LIST_REQUEST", fetchDeviceListSaga);
-    yield takeLeading("DEVICE_DETAILS_REQUEST", fetchDeviceDetailsSaga);
+    yield takeEvery("DEVICE_DETAILS_REQUEST", fetchDeviceDetailsSaga);
 }
