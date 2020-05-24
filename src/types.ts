@@ -1,5 +1,4 @@
-import type AppError from "./lib/AppError";
-import {NotificationLevel} from "./lib/logger";
+import type {NotificationLevel} from "./lib/logger";
 
 export type Dictionary<T> = { [key: string]: T }
 
@@ -27,7 +26,7 @@ declare namespace DataT {
         deviceId: string
         name: string
         label: string,
-        deviceTypeId: string
+        dth: DeviceType
     }
 
     interface DeviceDetails {
@@ -58,14 +57,7 @@ declare namespace DataT {
         "deviceNetworkType": string,
         "deviceTypeId": string,
         "deviceTypeName": string,
-        "dth": {
-            "completedSetup": boolean,
-            "deviceNetworkType": string,
-            "deviceTypeId": string,
-            "deviceTypeName": string,
-            "hubId": string,
-            "networkSecurityLevel": string
-        },
+        "dth": DeviceType
         "label": string,
         "locationId": string,
         "name": string,
@@ -74,6 +66,15 @@ declare namespace DataT {
         },
         "roomId": string,
         "type": string
+    }
+
+    interface DeviceType {
+        "completedSetup": boolean,
+        "deviceNetworkType": string,
+        "deviceTypeId": string,
+        "deviceTypeName": string,
+        "hubId": string,
+        "networkSecurityLevel": string
     }
 }
 
