@@ -1,7 +1,13 @@
-import AppData from "./AppData";
+import {DataT} from "../types";
 
 export interface Actions {
-    NOTIFICATION_ADD: Partial<AppData.Notification>
+    DEVICE_LIST_REQUEST: any
+    DEVICE_LIST_SET: DataT.DeviceShort[]
+
+    DEVICE_DETAILS_REQUEST: string
+    DEVICE_DETAILS_SET: DataT.DeviceDetails
+
+    NOTIFICATION_ADD: Partial<DataT.Notification>
     NOTIFICATION_REMOVE: string
 }
 

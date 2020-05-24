@@ -5,7 +5,7 @@ export default {
     lang_name: "Polski",
     lang_name_english: "Polish",
     app: {
-        name: "APSI app"
+        name: "MądreRzeczy"
     },
     login_screen: {
         sign_invite: "Zaloguj się",
@@ -20,6 +20,20 @@ export default {
         prefix: "Prawa autorskie ",
         name: "Zespół E",
         suffix: "."
+    },
+    page: {
+        device: {
+            delete_btn: {
+                label: "Usuń urządzenie",
+                confirm: "Czy na pewno chcesz usunąć urządzenie?"
+            }
+        },
+    },
+    component: {
+        delete_btn: {
+            accept: "Usuń",
+            dismiss: "Anuluj"
+        }
     },
     error_msg: {
         message_send_fail: "Błąd wysyłania wiadomości"

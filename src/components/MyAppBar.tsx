@@ -6,6 +6,8 @@ import ChatIcon from '@material-ui/icons/Chat';
 import {makeStyles} from "@material-ui/core/styles";
 import useTranslate from "../hooks/useTranslate";
 import LanguageButton from "./LanguageButton";
+import {useLocation} from "react-router-dom";
+
 
 const useStyles = makeStyles((theme) => ({
     iconLeft: {
@@ -21,9 +23,11 @@ const useStyles = makeStyles((theme) => ({
     name: "MyAppBar"
 });
 
-export default function MyAppBar(props) {
+export default function MyAppBar(props: {}) {
     const classes = useStyles();
     const translate = useTranslate();
+    const location = useLocation();
+    console.log(location);
 
     return <div>
 
@@ -35,7 +39,7 @@ export default function MyAppBar(props) {
                 <ChatIcon className={classes.iconLeft}/>
 
                 <Typography variant="h6" color="inherit" noWrap className={classes.title}>
-                    {translate("app.name")}
+                    {translate("app.name")}{location.pathname}
                 </Typography>
 
                 <LanguageButton/>

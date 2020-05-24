@@ -1,20 +1,20 @@
-import type AppData from "../AppData";
+import type {DataT} from "../../types";
 import {useSelector} from "react-redux";
 import areArraysSame from "../../lib/areArraysSame";
 
-export function notificationSelector(state: AppData.State, notification_id: string): AppData.Notification | null {
+export function notificationSelector(state: DataT.AppState, notification_id: string): DataT.Notification | null {
     return state?.notification_dictionary?.[notification_id] ?? null;
 }
 
 export function useNotification(notification_id: string) {
-    return useSelector((state: AppData.State) => notificationSelector(state, notification_id));
+    return useSelector((state: DataT.AppState) => notificationSelector(state, notification_id));
 }
 
 export function useAllNotificationsIds() {
-    return useSelector((state: AppData.State) => Object.keys(state.notification_dictionary ?? {}), areArraysSame);
+    return useSelector((state: DataT.AppState) => Object.keys(state.notification_dictionary ?? {}), areArraysSame);
 }
 
-export function commitNotificationAdd(state: AppData.State, notification: AppData.Notification): AppData.State {
+export function commitNotificationAdd(state: DataT.AppState, notification: DataT.Notification): DataT.AppState {
     let notification_dictionary = state.notification_dictionary ?? {};
     let next_notification_id = state.next_notification_id ?? 0;
 
@@ -30,7 +30,7 @@ export function commitNotificationAdd(state: AppData.State, notification: AppDat
     }
 }
 
-export function commitNotificationRemove(state: AppData.State, notification_id: string): AppData.State {
+export function commitNotificationRemove(state: DataT.AppState, notification_id: string): DataT.AppState {
     let notification_dictionary = state.notification_dictionary ?? {};
 
     notification_dictionary = {...notification_dictionary};

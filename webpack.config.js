@@ -5,7 +5,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const clientConfig = {
     target: "web",
     entry: {
-        main: "./src/index.jsx"
+        main: "./src/index.tsx"
     },
     output: {
         filename: "[name].js",
@@ -13,19 +13,25 @@ const clientConfig = {
     },
     module: {
         rules: [{
-            test: /\.(ts|jsx)$/,
+            test: /\.(ts|tsx)$/,
             use: "ts-loader",
             exclude: /node_modules/,
         }]
     },
     resolve: {
-        extensions: [".ts", ".js", ".jsx", ".json"],
+        extensions: [".ts", ".tsx", ".js", ".json"],
+    },
+    node: {
+        fs: "empty"
     },
     plugins: [
         new HtmlWebpackPlugin({
             title: "APSI APP",
             filename: "index.html",
             chunks: ["main"],
+            meta: {
+                viewport: "minimum-scale=1, initial-scale=1, width=device-width"
+            }
         })
     ]
 };
