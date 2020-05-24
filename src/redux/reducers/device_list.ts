@@ -10,7 +10,7 @@ function deviceListSelector(state: DataT.AppState) {
     return state.device_list ?? null;
 }
 
-export function useDeviceList() {
+export function useDeviceList(): DataT.DeviceShort[] | null {
     const dispatch = useAppDispatch();
     const device_list = useAppSelector(deviceListSelector);
 
@@ -19,6 +19,12 @@ export function useDeviceList() {
     }
 
     return device_list;
+}
+
+export function useDeviceShort(device_id: string): DataT.DeviceShort | null {
+    const device_list = useDeviceList();
+
+    return device_list?.find(device => device.deviceId === device_id) ?? null;
 }
 
 export function commitDeviceListSet(state: DataT.AppState, action: Action<"DEVICE_LIST_SET">): DataT.AppState {
