@@ -11,6 +11,7 @@ export default function () {
 
     const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
 
+    // @ts-ignore
     const store = createStoreWithMiddleware(myApp);
 
     sagaMiddleware.run(mySaga);

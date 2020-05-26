@@ -8,5 +8,6 @@ const createMockStore = configureStore([]);
 export type MockStoreI = MockStoreEnhanced<DataT.AppState, {}>;
 
 export default function (): MockStoreI {
+    // @ts-ignore
     return createStore(myApp) as MockStoreI;
 }
