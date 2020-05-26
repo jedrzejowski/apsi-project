@@ -9,11 +9,12 @@ const initial_state: DataT.AppState = {
     authorization: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6"
 };
 
-export default function myApp(state: DataT.AppState = initial_state, action: Action): DataT.AppState {
+export default function myApp<T extends keyof Actions>(
+    state: DataT.AppState = initial_state,
+    action: Action
+): DataT.AppState {
 
-    let type: keyof Actions = action.type;
-
-    switch (type) {
+    switch (action.type) {
 
         case "DEVICE_LIST_SET":
             return commitDeviceListSet(state, action);
