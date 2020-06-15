@@ -1,6 +1,9 @@
-import {DataT} from "../types";
+import {DataT, RemoteObject} from "../types";
 
 export interface Actions {
+    CREDENTIALS_REQUEST: { username: string, password: string }
+    CREDENTIALS_SET: RemoteObject<DataT.Credentials>
+
     DEVICE_LIST_REQUEST: any
     DEVICE_LIST_SET: DataT.DeviceShort[]
 

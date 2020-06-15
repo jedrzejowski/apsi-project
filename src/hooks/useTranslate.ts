@@ -4,7 +4,7 @@ import get from "lodash/get";
 import type Lang from "../i18n/Lang";
 
 function translate(lang: Lang, id: string) {
-    return get(lang, id, id);
+    return get(lang, id, id) + "";
 }
 
 export default function () {

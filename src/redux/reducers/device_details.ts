@@ -21,13 +21,13 @@ export function useDeviceDetails(device_id: string) {
     return device_details;
 }
 
-export function commitDeviceDetailsSet(state: DataT.AppState, action: Action<"DEVICE_DETAILS_SET">): DataT.AppState {
+export function commitDeviceDetailsSet(state: DataT.AppState, device: DataT.DeviceDetails): DataT.AppState {
 
     return {
         ...state,
         device_map: {
             ...state.device_map,
-            [action.data.deviceId]: action.data
+            [device.deviceId]: device
         }
     }
 }

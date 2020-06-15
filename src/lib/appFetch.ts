@@ -13,7 +13,7 @@ export default function appFetch(args: {
         method: args.method,
         headers: new Headers({
             Accept: " */*",
-            "Authorization": args.state.authorization,
+            "Authorization": args.state?.credentials?.authorization_token ?? "",
         }),
         cache: "no-cache"
     })

@@ -2,10 +2,15 @@ import type {NotificationLevel} from "./lib/logger";
 
 export type Dictionary<T> = { [key: string]: T }
 
+export type RemoteObject<T> =
+    { type: "loading" } |
+    { type: "error", error: any } |
+    { type: "data", data: T };
+
 declare namespace DataT {
     interface AppState {
         backend_url: string,
-        authorization: string,
+        credentials?: RemoteObject<Credentials>,
 
         current_page?: { type: string, id: string }
 
@@ -14,6 +19,10 @@ declare namespace DataT {
 
         next_notification_id?: number
         notification_dictionary?: Dictionary<Notification>
+    }
+
+    interface Credentials {
+        authorization_token: string
     }
 
     interface Notification {

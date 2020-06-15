@@ -27,11 +27,11 @@ export function useDeviceShort(device_id: string): DataT.DeviceShort | null {
     return device_list?.find(device => device.deviceId === device_id) ?? null;
 }
 
-export function commitDeviceListSet(state: DataT.AppState, action: Action<"DEVICE_LIST_SET">): DataT.AppState {
+export function commitDeviceListSet(state: DataT.AppState, data: DataT.DeviceShort[]): DataT.AppState {
 
     return {
         ...state,
-        device_list: action.data
+        device_list: data
     }
 }
 

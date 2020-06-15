@@ -5,7 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import ChatIcon from '@material-ui/icons/Chat';
 import {makeStyles} from "@material-ui/core/styles";
 import useTranslate from "../hooks/useTranslate";
-import LanguageButton from "./LanguageButton";
+import LanguageButton from "./LanguageSwitch";
 import {useLocation} from "react-router-dom";
 
 
