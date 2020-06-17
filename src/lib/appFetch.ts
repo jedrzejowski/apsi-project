@@ -9,11 +9,15 @@ export default function appFetch(args: {
 }) {
     const url = "http://" + args.state.backend_url + args.url + "?" + encodeQueryData(args.params)
 
+    if (args.state.credentials?.type !== "data") {
+        throw new Error();
+    }
+
     return fetch(url, {
         method: args.method,
         headers: new Headers({
             Accept: " */*",
-            "Authorization": args.state?.credentials?.authorization_token ?? "",
+            "Authorization": args.state.credentials.data.authorization_token,
         }),
         cache: "no-cache"
     })

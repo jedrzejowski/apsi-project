@@ -8,6 +8,7 @@ import NotificationContainer from "./components/NotificationContainer";
 import TranslateProvider from "./i18n/TranslateProvider";
 import {CookiesProvider} from "react-cookie";
 import {HashRouter as Router} from "react-router-dom";
+import {HaversackProvider} from "./components/SliceOfBread";
 
 const app = document.createElement("div");
 app.id = "app";
@@ -18,9 +19,11 @@ ReactDOM.render(
         <Router>
             <AppDataProvider>
                 <TranslateProvider>
-                    <CssBaseline/>
-                    <App/>
-                    <NotificationContainer/>
+                    <HaversackProvider>
+                        <CssBaseline/>
+                        <App/>
+                        <NotificationContainer/>
+                    </HaversackProvider>
                 </TranslateProvider>
             </AppDataProvider>
         </Router>

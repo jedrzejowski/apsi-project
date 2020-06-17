@@ -1,7 +1,7 @@
 //
 //
 export default interface Lang {
-    language_button: string,
+    utf8_symbol: string,
     lang_name: string,
     lang_name_english: string,
     loading: string
@@ -20,6 +20,9 @@ export default interface Lang {
         }
     },
     page: {
+        dashboard: {
+            nav_title: string
+        },
         login: {
             sign_invite: string
             username_label: string

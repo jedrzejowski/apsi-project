@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     name: "MyAppBar"
 });
 
-export default function MyAppBar(props: {}) {
+export default function AppBarActions(props: {}) {
     const classes = useStyles();
     const translate = useTranslate();
     const location = useLocation();

@@ -1,15 +1,13 @@
 import React from "react";
-import {useParams} from "react-router-dom";
-import {useDeviceDetails} from "../redux/reducers/device_details";
-import {nbsp} from "../const";
 import Toolbar from "@material-ui/core/Toolbar";
 import CircularProgress from "@material-ui/core/CircularProgress";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Button from "@material-ui/core/Button";
-import useTranslate from "../hooks/useTranslate";
 import Typography from "@material-ui/core/Typography";
-import RedColor from "@material-ui/core/colors/red";
-import DeleteButton from "./lib/DeleteButton";
+import DeleteButton from "../lib/DeleteButton";
+import useTranslate from "../../hooks/useTranslate";
+import {useDeviceDetails} from "../../redux/reducers/device_details";
+import {nbsp} from "../../const";
+import SliceOfBread from "../SliceOfBread";
 
 const useStyle = makeStyles(theme => ({
     device_name: {
@@ -17,24 +15,27 @@ const useStyle = makeStyles(theme => ({
     }
 }))
 
-export default function DeviceDetails(props: {}) {
+export default function DeviceDetails(props: {
+    deviceId: string
+}) {
     const classes = useStyle();
     const translate = useTranslate();
-    const device_id = useParams<any>().deviceId;
 
-    const device_details = useDeviceDetails(device_id);
+    const device_details = useDeviceDetails(props.deviceId);
 
     if (!device_details) {
         return <CircularProgress/>
     }
 
     return <div>
+        <SliceOfBread label={device_details?.name ?? ""}/>
+
         <Toolbar className={classes.device_name}>
             <Typography variant="h6" gutterBottom className={classes.device_name}>
                 {device_details?.name ?? ""}
             </Typography>
             <DeleteButton confirmMessage={"page.device.delete_btn.confirm"}>
-                {translate("page.device.delete_btn.label")}
+                {translate("page.device.delete_btn.primary")}
             </DeleteButton>
         </Toolbar>
 

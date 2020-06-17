@@ -24,9 +24,13 @@ export function commitCredentialsSet(state: DataT.AppState, data: RemoteObject<D
 export function* fetchCredentialsSaga(action: Action<"CREDENTIALS_REQUEST">) {
     try {
         yield put(makeAction("CREDENTIALS_SET", {type: "loading"}));
-
         const {password, username} = action.data;
         const state: DataT.AppState = yield select();
+
+        if (username === "" || password === "") {
+            yield put(makeAction("CREDENTIALS_SET", {type: "error", error: null}));
+            return
+        }
 
         // const response = yield call(() => appFetch({
         //     state,
@@ -49,7 +53,7 @@ export function* fetchCredentialsSaga(action: Action<"CREDENTIALS_REQUEST">) {
                         authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6"
                     }
                 })
-            }, 10000);
+            }, 1000);
         }));
 
         yield put(makeAction("CREDENTIALS_SET", data));

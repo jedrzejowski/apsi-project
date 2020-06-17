@@ -11,6 +11,7 @@ import {LanguageContext} from "../i18n/TranslateProvider";
 import useTranslate from "../hooks/useTranslate";
 import noop from "../lib/noop";
 import Lang from "../i18n/Lang";
+import Emoji from "./lib/Emoji";
 
 export default function LanguageSwitch(props: {
     type?: "button" | "text"
@@ -35,12 +36,10 @@ export default function LanguageSwitch(props: {
         case "text":
 
             react_switch = <span
-                style={{
-                    cursor: "pointer"
-                }}
+                style={{cursor: "pointer"}}
                 onClick={event => setAnchorEl(event.currentTarget)}
             >
-                {translate("language_button")}
+                {translate("lang_name")}
             </span>
 
             break;
@@ -54,7 +53,7 @@ export default function LanguageSwitch(props: {
                 startIcon={<TranslateIcon/>}
                 endIcon={<ExpandMoreIcon/>}
             >
-                {translate("language_button")}
+                {translate("lang_name")}
             </Button>
 
             break;
@@ -111,6 +110,8 @@ function LanguageItem(props: {
             props.onClick();
         }}
     >
-        <ListItemText primary={props.language.lang_name}/>
+        <ListItemText primary={<>
+            <Emoji>{props.language.utf8_symbol}</Emoji>&nbsp;&nbsp;{props.language.lang_name}
+        </>}/>
     </ListItem>
 }

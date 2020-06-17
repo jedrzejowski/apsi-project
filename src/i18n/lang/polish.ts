@@ -1,7 +1,7 @@
 import type Lang from "../Lang";
 
 export default {
-    language_button: "POLSKI",
+    utf8_symbol: "🇵🇱",
     lang_name: "Polski",
     lang_name_english: "Polish",
     loading: "Ładowanie ...",
@@ -20,6 +20,9 @@ export default {
         }
     },
     page: {
+        dashboard: {
+            nav_title: "Pulpit"
+        },
         login: {
             sign_invite: "Zaloguj się",
             username_label: "Użytkownik",
