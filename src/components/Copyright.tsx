@@ -1,7 +1,7 @@
 import React from 'react';
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
-import useTranslate from "../hooks/useTranslate";
+import useTranslate from "../i18n/useTranslate";
 
 export default function () {
     const translate = useTranslate();

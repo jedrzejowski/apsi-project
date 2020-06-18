@@ -7,6 +7,15 @@ import {commitCredentialsSet} from "./reducers/credentials";
 
 const initial_state: DataT.AppState = {
     backend_url: default_backend_url,
+    credentials: {
+        type: "data",
+        data: {
+            authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6",
+            email: "leonidas1@sparta.gr",
+            first_name: "Leonidas I",
+            last_name: "Son of Anaxandridas II"
+        }
+    }
 };
 
 const commit_dictionary: {

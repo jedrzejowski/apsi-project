@@ -4,10 +4,11 @@ import CircularProgress from "@material-ui/core/CircularProgress";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Typography from "@material-ui/core/Typography";
 import DeleteButton from "../lib/DeleteButton";
-import useTranslate from "../../hooks/useTranslate";
+import useTranslate from "../../i18n/useTranslate";
 import {useDeviceDetails} from "../../redux/reducers/device_details";
 import {nbsp} from "../../const";
-import SliceOfBread from "../SliceOfBread";
+import SliceOfBread from "../app/SliceOfBread";
+import Title from "../app/Title";
 
 const useStyle = makeStyles(theme => ({
     device_name: {
@@ -34,8 +35,8 @@ export default function DeviceDetails(props: {
             <Typography variant="h6" gutterBottom className={classes.device_name}>
                 {device_details?.name ?? ""}
             </Typography>
-            <DeleteButton confirmMessage={"page.device.delete_btn.confirm"}>
-                {translate("page.device.delete_btn.primary")}
+            <DeleteButton confirmMessage="page.device.delete_btn.confirm">
+                {translate("page.device.delete_btn.label")}
             </DeleteButton>
         </Toolbar>
 

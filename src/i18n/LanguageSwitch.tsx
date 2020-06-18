@@ -6,12 +6,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import TranslateIcon from "@material-ui/icons/Translate";
-import Languages from "../i18n/lang";
-import {LanguageContext} from "../i18n/TranslateProvider";
-import useTranslate from "../hooks/useTranslate";
+import {LanguageContext} from "./TranslateProvider";
+import useTranslate from "./useTranslate";
 import noop from "../lib/noop";
-import Lang from "../i18n/Lang";
-import Emoji from "./lib/Emoji";
+import Lang from "./Lang";
+import Emoji from "../components/lib/Emoji";
+import Languages from "./lang";
 
 export default function LanguageSwitch(props: {
     type?: "button" | "text"

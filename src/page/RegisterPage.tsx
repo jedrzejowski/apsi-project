@@ -10,8 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Container from "@material-ui/core/Container";
 import Copyright from "../components/Copyright";
-import LanguageSwitch from "../components/LanguageSwitch";
-import useTranslate from "../hooks/useTranslate";
+import LanguageSwitch from "../i18n/LanguageSwitch";
+import useTranslate from "../i18n/useTranslate";
 import AppLink from "../components/lib/AppLink";
 
 const useStyles = makeStyles((theme) => ({

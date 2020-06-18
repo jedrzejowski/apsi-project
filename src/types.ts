@@ -23,6 +23,13 @@ declare namespace DataT {
 
     interface Credentials {
         authorization_token: string
+        first_name: string
+        last_name: string
+        email: string
+    }
+
+    interface RegistrationData extends Credentials {
+        password: string
     }
 
     interface Notification {
@@ -78,12 +85,12 @@ declare namespace DataT {
     }
 
     interface DeviceType {
-        "completedSetup": boolean,
-        "deviceNetworkType": string,
-        "deviceTypeId": string,
-        "deviceTypeName": string,
-        "hubId": string,
-        "networkSecurityLevel": string
+        completedSetup: boolean,
+        deviceNetworkType: string,
+        deviceTypeId: string,
+        deviceTypeName: string,
+        hubId: string,
+        networkSecurityLevel: string
     }
 }
 

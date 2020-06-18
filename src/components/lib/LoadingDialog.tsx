@@ -2,7 +2,7 @@ import React from "react";
 import Dialog from "@material-ui/core/Dialog";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
-import useTranslate from "../../hooks/useTranslate";
+import useTranslate from "../../i18n/useTranslate";
 
 export default function (props: {
     loading: boolean

@@ -23,6 +23,17 @@ export default {
         dashboard: {
             nav_title: "Pulpit"
         },
+        profile: {
+            nav_title: "Mój profil",
+            name_of_field: "Pole",
+            value_of_field: "Wartość",
+            first_name: "Imię",
+            last_name: "Nazwisko",
+            authorization_token: "Token",
+            start_edit: "Edytuj",
+            cancel_edit: "Anuluj",
+            save_changes: "Zapisz"
+        },
         login: {
             sign_invite: "Zaloguj się",
             username_label: "Użytkownik",

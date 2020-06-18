@@ -1,6 +1,6 @@
 import React from "react";
-import SliceOfBread from "../components/SliceOfBread";
-import useTranslate from "../hooks/useTranslate";
+import SliceOfBread from "../components/app/SliceOfBread";
+import useTranslate from "../i18n/useTranslate";
 
 export default function Dashboard() {
     const translate = useTranslate();

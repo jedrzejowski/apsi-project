@@ -1,10 +1,11 @@
 import React, {useContext, useEffect, useReducer, useState} from "react";
 import Breadcrumbs from "@material-ui/core/Breadcrumbs";
-import noop from "../lib/noop";
-import AppLink from "./lib/AppLink";
+import noop from "../../lib/noop";
+import AppLink from "../lib/AppLink";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import {Typography} from "@material-ui/core";
 import {Variant as TypographyVariant} from "@material-ui/core/styles/createTypography";
+import useTranslate from "../../i18n/useTranslate";
 
 interface SliceOfBreadProps<Icon extends React.ElementType = any> {
     icon?: Icon
@@ -54,7 +55,7 @@ export function HaversackProvider(props: {
 
 const useStyles = makeStyles((theme) => ({
     link: {
-        display: 'flex',
+        display: "flex",
     },
     icon: {
         marginRight: theme.spacing(0.5),
@@ -67,15 +68,16 @@ export function Haversack(props: {
     variant?: TypographyVariant
 }) {
     const classes = useStyles();
+    const translate = useTranslate();
     const haversack = useContext(HaversackContext);
 
     return (
         <Breadcrumbs>
             {haversack.stack.map((slice, i) => {
-                return <AppLink key={i} to={slice.to ?? "#"}>
+                return <AppLink key={i} to={slice.to ?? "#"} color="inherit">
                     {slice.icon ? React.createElement(slice.icon, {className: classes.icon}) : null}
                     <Typography variant={props.variant} className={classes.link}>
-                        {slice.label}
+                        {translate(slice.label ?? "")}
                     </Typography>
                 </AppLink>
             })}

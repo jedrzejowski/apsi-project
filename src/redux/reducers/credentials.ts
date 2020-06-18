@@ -50,10 +50,13 @@ export function* fetchCredentialsSaga(action: Action<"CREDENTIALS_REQUEST">) {
                 resolve({
                     type: "data",
                     data: {
-                        authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6"
+                        authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6",
+                        email: "leonidas1@sparta.gr",
+                        first_name: "Leonidas I",
+                        last_name: "Son of Anaxandridas II"
                     }
                 })
-            }, 1000);
+            }, 100);
         }));
 
         yield put(makeAction("CREDENTIALS_SET", data));

@@ -23,6 +23,17 @@ export default {
         dashboard: {
             nav_title: "Dashboard"
         },
+        profile: {
+            nav_title: "My Profile",
+            name_of_field: "Field",
+            value_of_field: "Value",
+            first_name: "First name",
+            last_name: "Last name",
+            authorization_token: "Token",
+            start_edit: "Edit",
+            cancel_edit: "Cancel",
+            save_changes: "Save"
+        },
         login: {
             sign_invite: "Sign in",
             username_label: "Username",

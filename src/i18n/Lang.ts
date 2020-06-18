@@ -23,6 +23,17 @@ export default interface Lang {
         dashboard: {
             nav_title: string
         },
+        profile: {
+            name_of_field: string
+            nav_title: string
+            value_of_field: string
+            first_name: string
+            last_name: string
+            authorization_token: string
+            start_edit: string
+            cancel_edit: string
+            save_changes: string
+        },
         login: {
             sign_invite: string
             username_label: string

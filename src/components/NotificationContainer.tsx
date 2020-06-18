@@ -2,7 +2,7 @@ import React from "react";
 import {useAllNotificationsIds, useNotification} from "../redux/reducers/notifications";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import useTranslate from "../hooks/useTranslate";
+import useTranslate from "../i18n/useTranslate";
 import {useDispatch} from "react-redux";
 import {makeAction} from "../redux/actions";
 

@@ -10,19 +10,20 @@ import Toolbar from "@material-ui/core/Toolbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
 import AppBar from "@material-ui/core/AppBar";
-import useTranslate from "../hooks/useTranslate";
+import useTranslate from "../../i18n/useTranslate";
 import Hidden from "@material-ui/core/Hidden";
 import SliceOfBread, {Haversack} from "./SliceOfBread";
-import AppBarActions from "./AppBarActions";
+import Copyright from "../Copyright";
+import Container from "@material-ui/core/Container";
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display: 'flex',
+        display: "flex",
     },
     drawer: {
-        [theme.breakpoints.up('sm')]: {
+        [theme.breakpoints.up("sm")]: {
             width: drawerWidth,
             flexShrink: 0,
         },
@@ -35,25 +36,38 @@ const useStyles = makeStyles(theme => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        [theme.breakpoints.up('sm')]: {
-            display: 'none',
+        [theme.breakpoints.up("sm")]: {
+            display: "none",
         },
     },
     toolbar: theme.mixins.toolbar,
     drawerPaper: {
         width: drawerWidth
     },
-    content: {
+    main: {
+        display: "flex",
         flexGrow: 1,
-        padding: theme.spacing(3),
+        flexDirection: "column",
+        minHeight: "100vh",
+    },
+    content: {
+        paddingTop: theme.spacing(3),
+        paddingBottom: theme.spacing(3),
     },
     closeMenuButton: {
-        marginRight: 'auto',
+        marginRight: "auto",
         marginLeft: 0,
-    }
+    },
+    footer: {
+        padding: theme.spacing(3, 2),
+        marginTop: "auto",
+        backgroundColor:
+            theme.palette.type === "light" ? theme.palette.grey[200] : theme.palette.grey[800],
+    },
 }));
 
-export default function MainLayout(props: {
+
+export default function MyLayout(props: {
     children: React.ReactNode
 }) {
     const classes = useStyles();
@@ -73,6 +87,7 @@ export default function MainLayout(props: {
 
     return (
         <div className={classes.root}>
+
             <AppBar position="fixed" className={classes.appBar}>
                 <Toolbar>
                     <IconButton
@@ -85,7 +100,7 @@ export default function MainLayout(props: {
                         <MenuIcon/>
                     </IconButton>
 
-                    <Typography variant="h6" color="inherit" className={classes.appBarTitle}>
+                    <Typography variant="h6" className={classes.appBarTitle}>
                         {translate("app.name")}
                     </Typography>
 
@@ -126,13 +141,23 @@ export default function MainLayout(props: {
                 </Hidden>
             </nav>
 
-            <div className={classes.content}>
+            <div className={classes.main}>
                 <div className={classes.toolbar}/>
 
-                <Haversack/>
+                <Container>
+                    <Haversack/>
+                </Container>
+
                 <SliceOfBread to="/" icon={HomeIcon}/>
 
-                {props.children}
+                <main className={classes.content}>
+                    {props.children}
+                </main>
+
+                <footer className={classes.footer}>
+                    <Copyright/>
+                </footer>
+
             </div>
 
         </div>
