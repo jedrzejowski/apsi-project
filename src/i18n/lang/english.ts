@@ -54,6 +54,7 @@ export default {
             sign_in: "Sign in"
         },
         device: {
+            nav_group_label: "Devices",
             delete_btn: {
                 label: "Delete device",
                 confirm: "Are u sure to delete device?"

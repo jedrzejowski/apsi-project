@@ -54,6 +54,7 @@ export default {
             sign_in: "Zaloguj się"
         },
         device: {
+            nav_group_label: "Urządzenia",
             delete_btn: {
                 confirm: "Czy na pewno chcesz usunąć urządzenie?",
                 label: "Usuń urządzenie",

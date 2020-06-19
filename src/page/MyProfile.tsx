@@ -5,7 +5,7 @@ import Grid from "@material-ui/core/Grid";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
-import {useCredentials} from "../redux/reducers/credentials";
+import {useUserData} from "../redux/reducers/user_data";
 import Typography from "@material-ui/core/Typography";
 import UserDataTable from "../components/profile/UserDataTable";
 
@@ -38,7 +38,7 @@ const avatar_src = "https://i2.wp.com/www.killthecan.org/wp-content/uploads/2017
 export default function MyProfile() {
     const classes = useStyles();
     const translate = useTranslate();
-    const credentials = useCredentials();
+    const credentials = useUserData();
 
     if (credentials?.type !== "data") {
         throw new Error()

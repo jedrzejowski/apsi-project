@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
@@ -16,7 +13,7 @@ import useAppDispatch from "../hooks/useAppDispatch";
 import Copyright from "../components/Copyright";
 import LanguageSwitch from "../i18n/LanguageSwitch";
 import AppLink from "../components/lib/AppLink";
-import {useCredentials} from "../redux/reducers/credentials";
+import {useUserData} from "../redux/reducers/user_data";
 import LoadingDialog from "../components/lib/LoadingDialog";
 
 const useStyles = makeStyles((theme) => ({
@@ -44,14 +41,14 @@ export default function LoginPage() {
     const translate = useTranslate();
 
     const dispatch = useAppDispatch();
-    const credentials = useCredentials();
+    const credentials = useUserData();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
 
     function handleSubmit(event: React.MouseEvent) {
         event.preventDefault();
-        dispatch("CREDENTIALS_REQUEST", {username, password});
+        dispatch("USER_LOGIN", {username, password});
     }
 
     return <>

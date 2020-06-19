@@ -1,6 +1,8 @@
 const path = require("path");
 
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const {BundleAnalyzerPlugin} = require("webpack-bundle-analyzer");
+const nodeExternals = require("webpack-node-externals");
 
 const clientConfig = {
     target: "web",
@@ -32,7 +34,8 @@ const clientConfig = {
             meta: {
                 viewport: "minimum-scale=1, initial-scale=1, width=device-width"
             }
-        })
+        }),
+        new BundleAnalyzerPlugin()
     ],
     optimization: {
         splitChunks: {
@@ -51,10 +54,15 @@ const clientConfig = {
                 //         return `npm.${packageName.replace('@', '')}`;
                 //     },
                 // },
-                rest: {
+                vendor: {
                     priority: 0,
-                    test: /[\\/]node_modules[\\/]/,
+                    test: /\/node_modules\//,
                     name: "node-modules"
+                },
+                react: {
+                    priority: 9,
+                    test: /\/node_modules\/react/,
+                    name: "react"
                 },
                 mui: {
                     priority: 10,
@@ -66,4 +74,26 @@ const clientConfig = {
     },
 };
 
-module.exports = [clientConfig];
+const serverConfig = {
+    target: "node",
+    entry: {
+        serve: "./src/serve/index.ts",
+    },
+    output: {
+        filename: "[name].js",
+        path: path.resolve(__dirname, "dist/"),
+    },
+    module: {
+        rules: [{
+            test: /\.ts$/,
+            use: "ts-loader",
+            exclude: /node_modules/,
+        }]
+    },
+    resolve: {
+        extensions: [".ts", ".json"],
+    },
+    externals: [nodeExternals()]
+};
+
+module.exports = [clientConfig, serverConfig];

@@ -1,8 +1,10 @@
 import {DataT, RemoteObject} from "../types";
 
 export interface Actions {
-    CREDENTIALS_REQUEST: { username: string, password: string }
-    CREDENTIALS_SET: RemoteObject<DataT.Credentials>
+    USER_LOGIN: { username: string, password: string }
+    USER_DATA_SET: RemoteObject<DataT.UserData>
+    USER_DATA_UPDATE: DataT.UserData
+    USER_DATA_UPDATING_SET: boolean | undefined
 
     DEVICE_LIST_REQUEST: any
     DEVICE_LIST_SET: DataT.DeviceShort[]
@@ -10,7 +12,7 @@ export interface Actions {
     DEVICE_DETAILS_REQUEST: string
     DEVICE_DETAILS_SET: DataT.DeviceDetails
 
-    NOTIFICATION_ADD: Partial<DataT.Notification>
+    NOTIFICATION_ADD: DataT.Notification
     NOTIFICATION_REMOVE: string
 }
 

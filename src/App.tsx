@@ -2,7 +2,7 @@ import React from "react";
 import MyLayout from "./components/app/MyLayout";
 import {Route, Switch} from "react-router-dom";
 import DevicePage from "./page/DevicePage";
-import {useCredentials} from "./redux/reducers/credentials";
+import {useUserData} from "./redux/reducers/user_data";
 
 import LoginPage from "./page/LoginPage";
 import RegisterPage from "./page/RegisterPage";
@@ -10,7 +10,7 @@ import Dashboard from "./page/Dashboard";
 import MyProfile from "./page/MyProfile";
 
 export default function App() {
-    const credentials = useCredentials();
+    const credentials = useUserData();
 
     return <Switch>
 
@@ -27,7 +27,7 @@ export default function App() {
 
             <Route exact path="/login" component={LoginPage}/>
             <Route exact path="/register" component={RegisterPage}/>
-            <Route exact path="/" component={LoginPage}/>
+            <Route path="/" component={LoginPage}/>
 
         </>}
     </Switch>

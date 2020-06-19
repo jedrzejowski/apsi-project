@@ -1,5 +1,5 @@
 import {DataT} from "../../types";
-import appFetch from "../../lib/appFetch";
+import apiFetch from "../../lib/apiFetch";
 import {Action, makeAction} from "../actions";
 import {select, call, put} from "redux-saga/effects";
 import {NotificationLevel} from "../../lib/logger";
@@ -39,11 +39,20 @@ export function* fetchDeviceListSaga(action: Action<"DEVICE_LIST_REQUEST">) {
     try {
         const state: DataT.AppState = yield select();
 
-        const response = yield call(() => appFetch({
+        if (state.user_data?.type !== "data") {
+            throw new Error();
+        }
+
+        const user_data = state.user_data.data;
+
+        const response = yield call(() => apiFetch({
             state,
             method: "GET",
             url: "/devices/list",
-            params: {}
+            params: {},
+            headers: {
+                Authorization: user_data.authorization_token
+            }
         }));
 
         if (response.status !== 200) {

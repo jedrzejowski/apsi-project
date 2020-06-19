@@ -1,29 +1,20 @@
 import type {Action, Actions} from "./actions";
 import {DataT} from "../types";
-import {default_backend_url} from "../const";
 import {commitDeviceListSet} from "./reducers/device_list";
 import {commitDeviceDetailsSet} from "./reducers/device_details";
-import {commitCredentialsSet} from "./reducers/credentials";
+import {commitUserData, commitUserDataUpdating} from "./reducers/user_data";
+import {commitNotificationAdd} from "./reducers/notifications";
 
-const initial_state: DataT.AppState = {
-    backend_url: default_backend_url,
-    credentials: {
-        type: "data",
-        data: {
-            authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6",
-            email: "leonidas1@sparta.gr",
-            first_name: "Leonidas I",
-            last_name: "Son of Anaxandridas II"
-        }
-    }
-};
+const initial_state: DataT.AppState = {};
 
 const commit_dictionary: {
     [Key in keyof Actions]?: (state: DataT.AppState, action: Actions[Key]) => DataT.AppState
 } = {
-    CREDENTIALS_SET: commitCredentialsSet,
+    USER_DATA_SET: commitUserData,
+    USER_DATA_UPDATING_SET: commitUserDataUpdating,
     DEVICE_LIST_SET: commitDeviceListSet,
-    DEVICE_DETAILS_SET: commitDeviceDetailsSet
+    DEVICE_DETAILS_SET: commitDeviceDetailsSet,
+    NOTIFICATION_ADD: commitNotificationAdd
 }
 
 export default function myApp<Key extends keyof Actions>(
@@ -33,8 +24,11 @@ export default function myApp<Key extends keyof Actions>(
 
     const commit = commit_dictionary[action.type];
     if (commit) {
-        return commit(state, action.data);
+        // @ts-ignore
+        state = commit(state, action.data);
     }
+
+    console.log(state);
 
     return state;
 }
