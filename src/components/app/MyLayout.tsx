@@ -49,9 +49,11 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         flexDirection: "column",
         minHeight: "100vh",
+        "&>*+*": {
+            marginTop: theme.spacing(3),
+        }
     },
     content: {
-        paddingTop: theme.spacing(3),
         paddingBottom: theme.spacing(3),
     },
     closeMenuButton: {

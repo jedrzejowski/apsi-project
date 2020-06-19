@@ -54,6 +54,7 @@ export default interface Lang {
             sign_in: string
         }
         device: {
+            nav_group_label: string
             delete_btn: {
                 confirm: string
                 label: string

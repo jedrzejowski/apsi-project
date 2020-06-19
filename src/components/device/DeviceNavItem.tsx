@@ -9,9 +9,11 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import DevicesOtherIcon from '@material-ui/icons/DevicesOther'
 import {useDeviceList} from "../../redux/reducers/device_list";
 import NavItem from "../app/MyNavItem";
+import useTranslate from "../../i18n/useTranslate";
 
 export default function DeviceNavItem() {
     const device_list = useDeviceList();
+    const translate = useTranslate();
     const [open, setOpen] = useState(true);
 
     function handleClick() {
@@ -23,7 +25,7 @@ export default function DeviceNavItem() {
             <ListItemIcon>
                 <DevicesOtherIcon/>
             </ListItemIcon>
-            <ListItemText primary="Inbox"/>
+            <ListItemText primary={translate("page.device.nav_group_label")}/>
             {open ? <ExpandLessIcon/> : <ExpandMoreIcon/>}
         </ListItem>
 
