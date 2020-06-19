@@ -1,28 +1,34 @@
 import type {Action, Actions} from "./actions";
 import {DataT} from "../types";
-import {default_backend_url} from "../const";
 import {commitDeviceListSet} from "./reducers/device_list";
 import {commitDeviceDetailsSet} from "./reducers/device_details";
+import {commitUserData, commitUserDataUpdating} from "./reducers/user_data";
+import {commitNotificationAdd} from "./reducers/notifications";
 
-const initial_state: DataT.AppState = {
-    backend_url: default_backend_url,
-    authorization: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6"
-};
+const initial_state: DataT.AppState = {};
 
-export default function myApp<T extends keyof Actions>(
+const commit_dictionary: {
+    [Key in keyof Actions]?: (state: DataT.AppState, action: Actions[Key]) => DataT.AppState
+} = {
+    USER_DATA_SET: commitUserData,
+    USER_DATA_UPDATING_SET: commitUserDataUpdating,
+    DEVICE_LIST_SET: commitDeviceListSet,
+    DEVICE_DETAILS_SET: commitDeviceDetailsSet,
+    NOTIFICATION_ADD: commitNotificationAdd
+}
+
+export default function myApp<Key extends keyof Actions>(
     state: DataT.AppState = initial_state,
-    action: Action
+    action: Action<Key>
 ): DataT.AppState {
 
-    switch (action.type) {
-
-        case "DEVICE_LIST_SET":
-            return commitDeviceListSet(state, action);
-
-        case "DEVICE_DETAILS_SET":
-            return commitDeviceDetailsSet(state, action);
-
-        default:
-            return state;
+    const commit = commit_dictionary[action.type];
+    if (commit) {
+        // @ts-ignore
+        state = commit(state, action.data);
     }
+
+    console.log(state);
+
+    return state;
 }

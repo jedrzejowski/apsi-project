@@ -1,19 +1,20 @@
 import {DataT} from "../types";
 import encodeQueryData from "./encodeQueryData";
 
-export default function appFetch(args: {
+export default function apiFetch(args: {
     state: DataT.AppState,
-    method: "GET",
+    method: "GET" | "PUT" | "POST",
     url: string,
-    params?: any
+    params?: any,
+    headers?: any
 }) {
-    const url = "http://" + args.state.backend_url + args.url + "?" + encodeQueryData(args.params)
+    const url = `${location.origin}/api${args.url}?${encodeQueryData(args.params)}`;
 
     return fetch(url, {
         method: args.method,
         headers: new Headers({
-            Accept: " */*",
-            "Authorization": args.state.authorization,
+            Accept: "*/*",
+            ...(args.headers ?? {})
         }),
         cache: "no-cache"
     })

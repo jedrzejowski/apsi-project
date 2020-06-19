@@ -9,7 +9,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import RedColor from "@material-ui/core/colors/red";
-import useTranslate from "../../hooks/useTranslate";
+import useTranslate from "../../i18n/useTranslate";
 
 const useStyle = makeStyles(theme => ({
     delete_btn: {

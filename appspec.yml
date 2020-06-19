@@ -3,12 +3,8 @@ os: linux
 files:
   - source: dist/
     destination: /var/dashboard_frontend/dist/
-  - source: dev-server.js
-    destination: /var/dashboard_frontend/
   - source: scripts/dashboard_frontend.service
     destination: /etc/systemd/system/
-  - source: scripts/start_app.sh
-    destination: /var/dashboard_frontend/
   - source: package.json
     destination: /var/dashboard_frontend/
   - source: package-lock.json

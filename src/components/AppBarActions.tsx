@@ -4,8 +4,8 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ChatIcon from '@material-ui/icons/Chat';
 import {makeStyles} from "@material-ui/core/styles";
-import useTranslate from "../hooks/useTranslate";
-import LanguageButton from "./LanguageButton";
+import useTranslate from "../i18n/useTranslate";
+import LanguageButton from "../i18n/LanguageSwitch";
 import {useLocation} from "react-router-dom";
 
 
@@ -23,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
     name: "MyAppBar"
 });
 
-export default function MyAppBar(props: {}) {
+export default function AppBarActions(props: {}) {
     const classes = useStyles();
     const translate = useTranslate();
     const location = useLocation();
