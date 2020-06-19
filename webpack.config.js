@@ -35,7 +35,7 @@ const clientConfig = {
                 viewport: "minimum-scale=1, initial-scale=1, width=device-width"
             }
         }),
-        new BundleAnalyzerPlugin()
+        // new BundleAnalyzerPlugin()
     ],
     optimization: {
         splitChunks: {
