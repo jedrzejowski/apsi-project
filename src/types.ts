@@ -1,6 +1,6 @@
-import type {NotificationLevel} from "./lib/logger";
-
 export type Dictionary<T> = { [key: string]: T }
+
+export type NotificationLevel = "info" | "error" | "warning" | "success";
 
 export type RemoteObject<T> =
     { readonly type: "loading" } |

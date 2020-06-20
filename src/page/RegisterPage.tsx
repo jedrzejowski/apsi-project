@@ -1,4 +1,4 @@
-import React from "react";
+import React, {UIEvent, useState} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -13,6 +13,8 @@ import Copyright from "../components/Copyright";
 import LanguageSwitch from "../i18n/LanguageSwitch";
 import useTranslate from "../i18n/useTranslate";
 import AppLink from "../components/lib/AppLink";
+import useAppDispatch from "../hooks/useAppDispatch";
+import {useUserData} from "../redux/reducers/user_data";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,6 +39,36 @@ const useStyles = makeStyles((theme) => ({
 export default function RegisterPage() {
     const classes = useStyles();
     const translate = useTranslate();
+    const dispatch = useAppDispatch();
+
+    const user_data = useUserData();
+
+    const [first_name, setFirstName] = useState("");
+    const [last_name, setLastName] = useState("");
+    const [username, setUsername] = useState("");
+    const [authorization_token, setAuthorizationToken] = useState("");
+    const [password1, setPassword1] = useState("");
+    const [password2, setPassword2] = useState("");
+
+    function handleSubmit(event: any) {
+        event.preventDefault();
+
+        if (password1 !== password2) {
+            dispatch("NOTIFICATION_ADD", {
+                content:"error_msg.registration.password_mismatch",
+                level: "error"
+            })
+            return;
+        }
+
+        dispatch("USER_REGISTER", {
+            username,
+            authorization_token,
+            last_name,
+            first_name,
+            password: password1
+        })
+    }
 
     return (
         <Container component="main" maxWidth="xs">
@@ -53,13 +85,13 @@ export default function RegisterPage() {
                         <Grid item xs={12} sm={6}>
                             <TextField
                                 autoComplete="fname"
-                                name="firstName"
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="firstName"
                                 label={translate("page.register.first_name_label")}
                                 autoFocus
+                                value={first_name}
+                                onChange={event => setFirstName(event.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -67,10 +99,10 @@ export default function RegisterPage() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="lastName"
                                 label={translate("page.register.last_name_label")}
-                                name="lastName"
                                 autoComplete="lname"
+                                value={last_name}
+                                onChange={event => setLastName(event.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -78,10 +110,10 @@ export default function RegisterPage() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                id="email"
-                                label={translate("page.register.email_label")}
-                                name="email"
-                                autoComplete="email"
+                                label={translate("page.register.username_label")}
+                                autoComplete="username"
+                                value={username}
+                                onChange={event => setUsername(event.target.value)}
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -89,11 +121,33 @@ export default function RegisterPage() {
                                 variant="outlined"
                                 required
                                 fullWidth
-                                name="password"
                                 label={translate("page.register.password_label")}
                                 type="password"
-                                id="password"
                                 autoComplete="current-password"
+                                value={password1}
+                                onChange={event => setPassword1(event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                label={translate("page.register.password_label")}
+                                type="password"
+                                autoComplete="current-password"
+                                value={password2}
+                                onChange={event => setPassword2(event.target.value)}
+                            />
+                        </Grid>
+                        <Grid item xs={12}>
+                            <TextField
+                                variant="outlined"
+                                required
+                                fullWidth
+                                label={translate("page.register.token_label")}
+                                value={authorization_token}
+                                onChange={event => setAuthorizationToken(event.target.value)}
                             />
                         </Grid>
 
@@ -105,9 +159,11 @@ export default function RegisterPage() {
                         variant="contained"
                         color="primary"
                         className={classes.submit}
+                        onClick={handleSubmit}
                     >
                         {translate("page.register.submit")}
                     </Button>
+
                     <Grid container justify="flex-end">
                         <Grid item>
                             <AppLink to="/login">

@@ -1,13 +1,13 @@
-import React, {useState} from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import {makeStyles} from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import React, {useState} from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import makeStyles from "@material-ui/core/styles/makeStyles";
+import Container from "@material-ui/core/Container";
 import useTranslate from "../i18n/useTranslate";
 import useAppDispatch from "../hooks/useAppDispatch";
 import Copyright from "../components/Copyright";
@@ -19,16 +19,16 @@ import LoadingDialog from "../components/lib/LoadingDialog";
 const useStyles = makeStyles((theme) => ({
     paper: {
         marginTop: theme.spacing(8),
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
     },
     avatar: {
         margin: theme.spacing(1),
         backgroundColor: theme.palette.secondary.main,
     },
     form: {
-        width: '100%',
+        width: "100%",
         marginTop: theme.spacing(1),
     },
     submit: {
@@ -41,7 +41,7 @@ export default function LoginPage() {
     const translate = useTranslate();
 
     const dispatch = useAppDispatch();
-    const credentials = useUserData();
+    const user_data = useUserData();
 
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -73,7 +73,7 @@ export default function LoginPage() {
                         autoComplete="email"
                         autoFocus
                         onChange={e => setUsername(e.target.value)}
-                        error={credentials?.type === "error"}
+                        error={user_data?.type === "error"}
                     />
 
                     <TextField
@@ -87,7 +87,7 @@ export default function LoginPage() {
                         id="password"
                         autoComplete="current-password"
                         onChange={e => setPassword(e.target.value)}
-                        error={credentials?.type === "error"}
+                        error={user_data?.type === "error"}
                     />
 
                     <Button
@@ -129,6 +129,6 @@ export default function LoginPage() {
 
         </Container>
 
-        <LoadingDialog loading={credentials?.type === "loading"}/>
+        <LoadingDialog loading={user_data?.type === "loading"}/>
     </>
 }

@@ -29,11 +29,9 @@ const clientConfig = {
     plugins: [
         new HtmlWebpackPlugin({
             title: "APSI APP",
+            chunks: "main",
             filename: "index.html",
-            chunks:"main",
-            meta: {
-                viewport: "minimum-scale=1, initial-scale=1, width=device-width"
-            }
+            template: "index.ejs",
         }),
         // new BundleAnalyzerPlugin()
     ],

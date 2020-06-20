@@ -16,4 +16,5 @@ artifacts:
     - appspec.yml
     - scripts/*
     - node_modules/**/*
+    - .env.production
   discard-paths: no

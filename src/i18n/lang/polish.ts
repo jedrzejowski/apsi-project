@@ -10,7 +10,7 @@ export default {
     },
     copyright: {
         prefix: "Prawa autorskie ",
-        name: "Zespół 11",
+        name: "APSI, Zespół 11",
         suffix: "."
     },
     component: {
@@ -32,7 +32,8 @@ export default {
             authorization_token: "Token",
             start_edit: "Edytuj",
             cancel_edit: "Anuluj",
-            save_changes: "Zapisz"
+            save_changes: "Zapisz",
+            logout: "Wyloguj się"
         },
         login: {
             sign_invite: "Zaloguj się",
@@ -47,6 +48,7 @@ export default {
             username_label: "Użytkownik",
             password_label: "Hasło",
             email_label: "Email",
+            token_label: "Token SmartThings",
             first_name_label: "Imię",
             last_name_label: "Nazwisko",
             submit: "Zarejestruj się",

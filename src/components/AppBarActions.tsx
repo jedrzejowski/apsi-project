@@ -3,7 +3,7 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import ChatIcon from '@material-ui/icons/Chat';
-import {makeStyles} from "@material-ui/core/styles";
+import makeStyles from "@material-ui/core/styles/makeStyles";
 import useTranslate from "../i18n/useTranslate";
 import LanguageButton from "../i18n/LanguageSwitch";
 import {useLocation} from "react-router-dom";

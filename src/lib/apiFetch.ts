@@ -2,7 +2,6 @@ import {DataT} from "../types";
 import encodeQueryData from "./encodeQueryData";
 
 export default function apiFetch(args: {
-    state: DataT.AppState,
     method: "GET" | "PUT" | "POST",
     url: string,
     params?: any,

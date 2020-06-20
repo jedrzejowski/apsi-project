@@ -3,7 +3,7 @@ import Breadcrumbs from "@material-ui/core/Breadcrumbs";
 import noop from "../../lib/noop";
 import AppLink from "../lib/AppLink";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import {Typography} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
 import {Variant as TypographyVariant} from "@material-ui/core/styles/createTypography";
 import useTranslate from "../../i18n/useTranslate";
 

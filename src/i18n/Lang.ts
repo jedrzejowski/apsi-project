@@ -33,6 +33,7 @@ export default interface Lang {
             start_edit: string
             cancel_edit: string
             save_changes: string
+            logout: string
         },
         login: {
             sign_invite: string
@@ -47,6 +48,7 @@ export default interface Lang {
             username_label: string
             password_label: string
             email_label: string
+            token_label: string
             first_name_label: string
             last_name_label: string
             submit: string

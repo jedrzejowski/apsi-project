@@ -1,4 +1,4 @@
-import React from "react";
+import React, {MouseEventHandler} from "react";
 import useTranslate from "../../i18n/useTranslate";
 import {useLocation} from "react-router-dom";
 import AppLink from "../lib/AppLink";
@@ -12,6 +12,7 @@ export default function NavItem(props: {
     depth?: number
     primary: React.ReactElement | string
     icon?: React.ReactElement
+    onClick?: React.MouseEventHandler
 }) {
     const theme = useTheme();
     const translate = useTranslate();
@@ -22,6 +23,7 @@ export default function NavItem(props: {
     return (
         <AppLink to={props.to ?? "#"} color="inherit">
             <ListItem
+                onClick={props.onClick}
                 selected={location.pathname === props.to}
                 style={{
                     paddingLeft: theme.spacing(((props.depth ?? 0) + 1) * 2)

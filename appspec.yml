@@ -7,6 +7,8 @@ files:
     destination: /etc/systemd/system/
   - source: package.json
     destination: /var/dashboard_frontend/
+  - source: .env.production
+    destination: /var/dashboard_frontend/
   - source: package-lock.json
     destination: /var/dashboard_frontend/
   - source: node_modules

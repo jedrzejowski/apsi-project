@@ -3,7 +3,6 @@ import useAppSelector from "../../hooks/useAppSelector";
 import {Action, makeAction} from "../actions";
 import {call, put, select, all} from "redux-saga/effects";
 import apiFetch from "../../lib/apiFetch";
-import {NotificationLevel} from "../../lib/logger";
 
 function userDataSelector(state: DataT.AppState) {
     return state.user_data ?? null;
@@ -39,7 +38,6 @@ export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
     try {
         yield put(makeAction("USER_DATA_SET", {type: "loading"}));
         const {password, username} = action.data;
-        const state: DataT.AppState = yield select();
 
         if (username === "" || password === "") {
             yield put(makeAction("USER_DATA_SET", {type: "error", error: null}));
@@ -47,7 +45,6 @@ export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
         }
 
         let response = yield call(() => apiFetch({
-            state,
             method: "GET",
             url: "/users/login",
             params: {
@@ -64,7 +61,6 @@ export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
         const authorization_token = data.token;
 
         response = yield call(() => apiFetch({
-            state,
             method: "GET",
             url: "/users/info",
             params: {
@@ -99,15 +95,14 @@ export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
 
         yield put(
             makeAction("NOTIFICATION_ADD", {
-                content: "error_msg.credentials_fail",
-                level: NotificationLevel.Error
+                content: "error_msg.user_credentials_fail",
+                level: "error"
             })
         );
 
         yield put(makeAction("USER_DATA_SET", {type: "error", error}));
     }
 }
-
 
 export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
     const new_user_data = action.data;
@@ -130,7 +125,6 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
             new_user_data.first_name !== old_user_data.first_name
         ) {
             const response = yield call(() => apiFetch({
-                state,
                 method: "PUT",
                 url: "/users/update/info",
                 params: {
@@ -161,7 +155,6 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
         if (old_user_data.password !== new_user_data.password) {
 
             const response = yield call(() => apiFetch({
-                state,
                 method: "PUT",
                 url: "/users/update/password",
                 params: {
@@ -185,7 +178,6 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
         if (old_user_data.authorization_token !== new_user_data.authorization_token) {
 
             const response = yield call(() => apiFetch({
-                state,
                 method: "PUT",
                 url: "/users/update/token",
                 params: {
@@ -209,10 +201,66 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
         yield put(
             makeAction("NOTIFICATION_ADD", {
                 content: "error_msg.user_data_update_failed",
-                level: NotificationLevel.Error
+                level: "error"
             })
         );
     }
 
     yield put(makeAction("USER_DATA_UPDATING_SET", false));
+}
+
+export function* fetchUserRegisterSaga(action: Action<"USER_REGISTER">) {
+    try {
+        yield put(makeAction("USER_DATA_SET", {type: "loading"}));
+        const registration_data = action.data;
+
+        if (
+            registration_data.username === "" ||
+            registration_data.password === "" ||
+            registration_data.authorization_token === "" ||
+            registration_data.last_name === "" ||
+            registration_data.first_name === ""
+        ) {
+            yield put(makeAction("USER_DATA_SET", {type: "error", error: null}));
+            return
+        }
+
+        const response = yield call(() => apiFetch({
+            method: "POST",
+            url: "/users/create",
+            params: {
+                login: registration_data.username,
+                name: registration_data.first_name,
+                password: registration_data.password,
+                surname: registration_data.last_name,
+                token: registration_data.authorization_token
+            }
+        }));
+
+        if (response.status !== 200) {
+            throw new Error();
+        }
+
+        const data: string = yield call(() => response.text());
+
+        if (data !== "user created") {
+            throw new Error();
+        }
+
+        yield put(makeAction("USER_LOGIN", {
+            username: registration_data.username,
+            password: registration_data.password
+        }));
+
+    } catch (error) {
+
+        yield put(
+            makeAction("NOTIFICATION_ADD", {
+                content: "error_msg.registration_fail",
+                level: "error"
+            })
+        );
+
+        yield put(makeAction("USER_DATA_SET", {type: "error", error}));
+    }
 }

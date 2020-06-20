@@ -2,7 +2,6 @@ import {DataT} from "../../types";
 import apiFetch from "../../lib/apiFetch";
 import {Action, makeAction} from "../actions";
 import {select, call, put} from "redux-saga/effects";
-import {NotificationLevel} from "../../lib/logger";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 
@@ -15,7 +14,7 @@ export function useDeviceList(): DataT.DeviceShort[] | null {
     const device_list = useAppSelector(deviceListSelector);
 
     if (!device_list) {
-        dispatch("DEVICE_LIST_REQUEST", null);
+        dispatch("DEVICE_LIST_REQUEST", undefined);
     }
 
     return device_list;
@@ -46,7 +45,6 @@ export function* fetchDeviceListSaga(action: Action<"DEVICE_LIST_REQUEST">) {
         const user_data = state.user_data.data;
 
         const response = yield call(() => apiFetch({
-            state,
             method: "GET",
             url: "/devices/list",
             params: {},
@@ -66,8 +64,8 @@ export function* fetchDeviceListSaga(action: Action<"DEVICE_LIST_REQUEST">) {
 
         yield put(
             makeAction("NOTIFICATION_ADD", {
-                content: "error_msg.credentials_fail",
-                level: NotificationLevel.Error
+                content: "error_msg.token_credentials_fail",
+                level: "error"
             })
         );
     }

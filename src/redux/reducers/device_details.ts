@@ -2,7 +2,6 @@ import {DataT} from "../../types";
 import apiFetch from "../../lib/apiFetch";
 import {Action, makeAction} from "../actions";
 import {select, call, put} from "redux-saga/effects";
-import {NotificationLevel} from "../../lib/logger";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 
@@ -43,7 +42,6 @@ export function* fetchDeviceDetailsSaga(action: Action<"DEVICE_DETAILS_REQUEST">
         const user_data = state.user_data.data;
 
         const response = yield call(() => apiFetch({
-            state,
             method: "GET",
             url: "/devices/details",
             params: {
@@ -66,8 +64,8 @@ export function* fetchDeviceDetailsSaga(action: Action<"DEVICE_DETAILS_REQUEST">
 
         yield put(
             makeAction("NOTIFICATION_ADD", {
-                content: "error_msg.credentials_fail",
-                level: NotificationLevel.Error
+                content: "error_msg.token_credentials_fail",
+                level: "error"
             })
         );
     }

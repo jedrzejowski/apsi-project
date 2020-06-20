@@ -5,11 +5,23 @@ import {commitDeviceDetailsSet} from "./reducers/device_details";
 import {commitUserData, commitUserDataUpdating} from "./reducers/user_data";
 import {commitNotificationAdd} from "./reducers/notifications";
 
-const initial_state: DataT.AppState = {};
+const initial_state: DataT.AppState = {
+    // user_data: {
+    //     data: {
+    //         authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6",
+    //         first_name: "Janusz",
+    //         last_name: "Kowalski",
+    //         password: "123456",
+    //         username: "test3",
+    //     },
+    //     type: "data"
+    // }
+};
 
 const commit_dictionary: {
     [Key in keyof Actions]?: (state: DataT.AppState, action: Actions[Key]) => DataT.AppState
 } = {
+    USER_LOGOUT: () => initial_state,
     USER_DATA_SET: commitUserData,
     USER_DATA_UPDATING_SET: commitUserDataUpdating,
     DEVICE_LIST_SET: commitDeviceListSet,
@@ -27,8 +39,6 @@ export default function myApp<Key extends keyof Actions>(
         // @ts-ignore
         state = commit(state, action.data);
     }
-
-    console.log(state);
 
     return state;
 }

@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import LoadingDialog from "../lib/LoadingDialog";
+import Typography from "@material-ui/core/Typography";
 
 const useStyles = makeStyles((theme) => ({
     toolbar: {
@@ -130,13 +131,19 @@ function EditableValue(props: {
     return (
         <TableRow>
             <TableCell align="left" component="th">
-                {translate(props.name)}
+                <Typography noWrap>
+                    {translate(props.name)}
+                </Typography>
             </TableCell>
             <TableCell align="right">
-                {props.edit ?
+                {props.edit ? (
                     <TextField value={props.value} fullWidth
                                onChange={event => props.onChange(event.target.value)}/>
-                    : props.value}
+                ) : (
+                    <Typography>
+                        {props.value}
+                    </Typography>
+                )}
             </TableCell>
         </TableRow>
     )

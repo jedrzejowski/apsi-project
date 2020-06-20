@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Navigation from "./MyNavigation";
 import MenuIcon from '@material-ui/icons/Menu';
-import {Drawer} from "@material-ui/core";
+import Drawer from "@material-ui/core/Drawer";
 import useTheme from "@material-ui/core/styles/useTheme";
 import Typography from "@material-ui/core/Typography";
 import HomeIcon from '@material-ui/icons/Home';
@@ -15,6 +15,7 @@ import Hidden from "@material-ui/core/Hidden";
 import SliceOfBread, {Haversack} from "./SliceOfBread";
 import Copyright from "../Copyright";
 import Container from "@material-ui/core/Container";
+import MyFooter from "./MyFooter";
 
 const drawerWidth = 240;
 
@@ -23,7 +24,7 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
     },
     drawer: {
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up("md")]: {
             width: drawerWidth,
             flexShrink: 0,
         },
@@ -36,7 +37,7 @@ const useStyles = makeStyles(theme => ({
     },
     menuButton: {
         marginRight: theme.spacing(2),
-        [theme.breakpoints.up("sm")]: {
+        [theme.breakpoints.up("md")]: {
             display: "none",
         },
     },
@@ -75,15 +76,15 @@ export default function MyLayout(props: {
     const classes = useStyles();
     const theme = useTheme();
     const translate = useTranslate();
-    const [mobileOpen, setMobileOpen] = useState(false);
+    const [mobile_open, setMobileOpen] = useState(false);
 
     function handleDrawerToggle() {
-        setMobileOpen(!mobileOpen)
+        setMobileOpen(!mobile_open)
     }
 
     const drawer = (
         <div>
-            <Navigation/>
+            <Navigation onClick={handleDrawerToggle}/>
         </div>
     );
 
@@ -94,7 +95,6 @@ export default function MyLayout(props: {
                 <Toolbar>
                     <IconButton
                         color="inherit"
-                        aria-label="Open drawer"
                         edge="start"
                         onClick={handleDrawerToggle}
                         className={classes.menuButton}
@@ -110,11 +110,11 @@ export default function MyLayout(props: {
             </AppBar>
 
             <nav className={classes.drawer}>
-                <Hidden smUp implementation="css">
+                <Hidden mdUp implementation="css">
                     <Drawer
                         variant="temporary"
-                        anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                        open={mobileOpen}
+                        anchor={theme.direction === "rtl" ? "right" : "left"}
+                        open={mobile_open}
                         onClose={handleDrawerToggle}
                         classes={{
                             paper: classes.drawerPaper,
@@ -129,7 +129,7 @@ export default function MyLayout(props: {
                         {drawer}
                     </Drawer>
                 </Hidden>
-                <Hidden xsDown implementation="css">
+                <Hidden smDown implementation="css">
                     <Drawer
                         className={classes.drawer}
                         variant="permanent"
@@ -157,7 +157,7 @@ export default function MyLayout(props: {
                 </main>
 
                 <footer className={classes.footer}>
-                    <Copyright/>
+                    <MyFooter/>
                 </footer>
 
             </div>
