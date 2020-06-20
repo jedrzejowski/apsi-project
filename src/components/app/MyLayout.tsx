@@ -82,12 +82,6 @@ export default function MyLayout(props: {
         setMobileOpen(!mobile_open)
     }
 
-    const drawer = (
-        <div>
-            <Navigation onClick={handleDrawerToggle}/>
-        </div>
-    );
-
     return (
         <div className={classes.root}>
 
@@ -126,7 +120,9 @@ export default function MyLayout(props: {
                         <IconButton onClick={handleDrawerToggle} className={classes.closeMenuButton}>
                             <CloseIcon/>
                         </IconButton>
-                        {drawer}
+                        <div>
+                            <Navigation onClick={handleDrawerToggle}/>
+                        </div>
                     </Drawer>
                 </Hidden>
                 <Hidden smDown implementation="css">
@@ -138,7 +134,9 @@ export default function MyLayout(props: {
                         }}
                     >
                         <div className={classes.toolbar}/>
-                        {drawer}
+                        <div>
+                            <Navigation/>
+                        </div>
                     </Drawer>
                 </Hidden>
             </nav>
