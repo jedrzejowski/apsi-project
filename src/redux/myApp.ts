@@ -7,6 +7,7 @@ import {commitNotificationAdd} from "./reducers/notifications";
 import {commitCapabilitiesTilesSet} from "./reducers/capabilities_tiles";
 import {commitDeviceHistorySet} from "./reducers/device_history";
 import {commitUserHistorySet} from "./reducers/user_history";
+import {commitDevicesCapabilityStatusSet} from "./reducers/devices_capability_status";
 
 const initial_state: DataT.AppState = {
     user_data: {
@@ -33,6 +34,7 @@ const commit_dictionary: {
     DEVICE_LIST_SET: commitDeviceListSet,
     DEVICE_DETAILS_SET: commitDeviceDetailsSet,
     DEVICE_HISTORY_SET: commitDeviceHistorySet,
+    DEVICE_CAPABILITIES_STATUS_SET: commitDevicesCapabilityStatusSet,
 
     CAPABILITIES_TILES_SET: commitCapabilitiesTilesSet,
 

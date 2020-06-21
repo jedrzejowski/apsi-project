@@ -6,11 +6,14 @@ import DeviceDashboardItem from "../components/device/DeviceDashboardItem";
 import ColumnLayout from "../components/lib/ColumnLayout";
 import useTheme from "@material-ui/core/styles/useTheme";
 import useMediaQuery from "@material-ui/core/useMediaQuery";
-
+import {useDeviceList} from "../redux/reducers/device_list";
+import RemoteObjectPlaceholder from "../components/lib/RemoteObjectPlaceholder";
+import Typography from "@material-ui/core/Typography";
 
 export default function Dashboard() {
     const theme = useTheme();
     const translate = useTranslate();
+    const device_list = useDeviceList();
 
     const is_mobile = useMediaQuery(theme.breakpoints.down("xs"));
     const is_medium = useMediaQuery(theme.breakpoints.down("md"));
@@ -25,30 +28,24 @@ export default function Dashboard() {
         spacing = 2;
     }
 
+
     return <>
         <SliceOfBread label={translate("page.dashboard.nav_title")}/>
 
-
         <Container>
-            <ColumnLayout
-                columns={columns}
-                hSpacing={theme.spacing(spacing - 1)}
-                vSpacing={theme.spacing(spacing)}
-            >
 
-                <DeviceDashboardItem/>
-                <DeviceDashboardItem/>
-                <DeviceDashboardItem/>
+            {device_list.type === "data" ? (
+                <ColumnLayout columns={columns}
+                              hSpacing={theme.spacing(spacing - 1)}
+                              vSpacing={theme.spacing(spacing)}>
 
-                <DeviceDashboardItem/>
-                <DeviceDashboardItem/>
-                <DeviceDashboardItem/>
+                    {device_list.data.map(device => {
+                        return <DeviceDashboardItem key={device.deviceId} deviceId={device.deviceId}/>
+                    })}
 
-                <DeviceDashboardItem/>
-                <DeviceDashboardItem/>
-                <DeviceDashboardItem/>
+                </ColumnLayout>
+            ) : (<RemoteObjectPlaceholder object={device_list}/>)}
 
-            </ColumnLayout>
         </Container>
     </>
 }

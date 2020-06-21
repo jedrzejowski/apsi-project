@@ -21,9 +21,10 @@ export default function NavItem(props: {
     const primary = typeof props.primary === "string" ? translate(props.primary) : props.primary;
 
     return (
-        <AppLink to={props.to ?? "#"} color="inherit">
+        <AppLink to={props.to ?? "#"}
+                 color="inherit"
+                 onClick={props.onClick}>
             <ListItem
-                onClick={props.onClick}
                 selected={match?.path === props.to}
                 style={{
                     paddingLeft: theme.spacing(((props.depth ?? 0) + 1) * 2)

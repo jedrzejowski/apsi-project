@@ -39,6 +39,7 @@ export function* fetchDeviceHistorySaga(action: Action<"DEVICE_HISTORY_REQUEST">
     const device_id = action.data;
 
     try {
+
         const response = yield call(() => apiFetch({
             method: "GET",
             url: "/history/device",

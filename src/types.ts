@@ -2,10 +2,10 @@ export type Dictionary<T> = { [key: string]: T }
 
 export type NotificationLevel = "info" | "error" | "warning" | "success";
 
-export type RemoteObject<T> =
-    { id: string, type: "loading" } |
-    { id: string, type: "error", error: any } |
-    { id: string, type: "data", data: T };
+export type RemoteObject<T, ID = string> =
+    { id: ID, type: "loading" } |
+    { id: ID, type: "error", error: any } |
+    { id: ID, type: "data", data: T };
 
 declare namespace DataT {
     interface AppState {
@@ -16,6 +16,8 @@ declare namespace DataT {
         device_list?: RemoteObject<DeviceShort[]>
         device_details?: Dictionary<RemoteObject<DeviceDetails>>
         device_history?: Dictionary<RemoteObject<HistoryEntry[]>>
+        devices_capability_status?: Dictionary<RemoteObject<DeviceCapabilityStatus, [string, string]>>
+
         capabilities_tiles?: Dictionary<RemoteObject<CapabilityTile[]>>
 
         next_notification_id?: number
@@ -117,6 +119,10 @@ declare namespace DataT {
         device: string,
         timestamp: string,
         user: string
+    }
+
+    interface DeviceCapabilityStatus {
+        value: string
     }
 }
 

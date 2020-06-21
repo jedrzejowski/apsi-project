@@ -10,6 +10,7 @@ import {fetchCapabilitiesTilesSaga} from "./reducers/capabilities_tiles";
 import {fetchDeviceCommandRequestSaga} from "./reducers/device_command";
 import {fetchDeviceHistorySaga} from "./reducers/device_history";
 import {fetchUserHistorySaga} from "./reducers/user_history";
+import {fetchDeviceCapabilityStatusRequestSaga} from "./reducers/devices_capability_status";
 
 let takeLeading = <Key extends keyof Actions>(name: Key, f: (action: Action<Key>) => any) => takeLeadingSaga(name, f);
 let takeEvery = <Key extends keyof Actions>(name: Key, f: (action: Action<Key>) => any) => takeEverySaga(name, f);
@@ -20,10 +21,11 @@ export default function* mySaga() {
     yield takeLeading("USER_REGISTER", fetchUserRegisterSaga);
     yield takeLeading("USER_HISTORY_REQUEST", fetchUserHistorySaga);
 
-    yield takeLeading("DEVICE_DETAILS_REQUEST", fetchDeviceDetailsSaga);
+    yield takeEvery("DEVICE_DETAILS_REQUEST", fetchDeviceDetailsSaga);
     yield takeLeading("DEVICE_LIST_REQUEST", fetchDeviceListSaga);
-    yield takeLeading("DEVICE_COMMAND_REQUEST", fetchDeviceCommandRequestSaga);
+    yield takeEvery("DEVICE_COMMAND_REQUEST", fetchDeviceCommandRequestSaga);
     yield takeLeading("DEVICE_HISTORY_REQUEST", fetchDeviceHistorySaga);
+    yield takeEvery("DEVICE_CAPABILITIES_STATUS_REQUEST", fetchDeviceCapabilityStatusRequestSaga);
 
-    yield takeLeading("CAPABILITIES_TILES_REQUEST", fetchCapabilitiesTilesSaga);
+    yield takeEvery("CAPABILITIES_TILES_REQUEST", fetchCapabilitiesTilesSaga);
 }

@@ -38,11 +38,6 @@ export function commitCapabilitiesTilesSet(state: DataT.AppState, object: Remote
 
 export function* fetchCapabilitiesTilesSaga(action: Action<"CAPABILITIES_TILES_REQUEST">) {
     try {
-        yield put(makeAction("CAPABILITIES_TILES_SET", {
-            id: action.data,
-            type: "loading"
-        }));
-
         const response = yield call(() => apiFetch({
             method: "GET",
             url: "/capabilities/tiles",

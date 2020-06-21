@@ -8,7 +8,8 @@ const useStyles = makeStyles({
         flexWrap: "nowrap"
     },
     column: {
-        flexGrow: 1
+        flexGrow: 1,
+        flexBasis: 0
     },
     columnSpacing: {
         flexShrink: 0

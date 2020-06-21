@@ -74,7 +74,9 @@ export default {
             },
             commands: {
                 nav_title: "Commands",
-                no_commands: "No commands"
+                no_commands: "No commands",
+                name_label: "Name:",
+                value_label: "Value:"
             },
             history: {
                 nav_title: "History"

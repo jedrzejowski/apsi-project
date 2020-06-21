@@ -9,6 +9,11 @@ export function* fetchDeviceCommandRequestSaga(action: Action<"DEVICE_COMMAND_RE
     try {
         const user_data: ReturnType<typeof userDataSelector> = yield select(userDataSelector);
 
+        yield put(makeAction("DEVICE_CAPABILITIES_STATUS_SET", {
+            id: [command_request.device_id, command_request.capability_name],
+            type: "loading"
+        }));
+
         if (user_data?.type !== "data") {
             throw new Error();
         }
@@ -34,12 +39,17 @@ export function* fetchDeviceCommandRequestSaga(action: Action<"DEVICE_COMMAND_RE
             })
         }));
 
+
+        yield put(makeAction("DEVICE_CAPABILITIES_STATUS_REQUEST", {
+            device_id: command_request.device_id,
+            capability_id: command_request.capability_name
+        }));
+
         if (response.status !== 200) {
             throw new Error();
         }
 
         const data = yield call(() => response.text());
-        console.log(data);
 
         yield put(makeAction("NOTIFICATION_ADD", {
             level: "success",

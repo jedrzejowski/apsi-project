@@ -12,32 +12,43 @@ import {useHistory} from "react-router-dom";
 
 
 export default function (props: {
-    onClick?: () => void
+    onItemClick?: () => void
 }) {
     const dispatch = useAppDispatch();
     const history = useHistory();
 
     function handleLogout() {
         dispatch("USER_LOGOUT", undefined);
-        history.push("/")
+        history.push("/");
+        props.onItemClick?.();
     }
 
-    return <>
-        <List onClick={props.onClick}>
+    return <List>
 
-            <NavItem to="/dashboard" primary="page.dashboard.nav_title" icon={<DashboardIcon/>}/>
+        <NavItem to="/dashboard"
+                 primary="page.dashboard.nav_title"
+                 icon={<DashboardIcon/>}
+                 onClick={props.onItemClick}/>
 
-            <Divider/>
+        <Divider/>
 
-            <DeviceNavItem/>
+        <DeviceNavItem onItemClick={props.onItemClick}/>
 
-            <Divider/>
+        <Divider/>
 
-            <NavItem to="/my-profile" primary="page.myprofile.nav_title" icon={<AccountCircleIcon/>}/>
-            <NavItem to="/my-history" primary="page.myhistory.nav_title" icon={<HistoryIcon/>}/>
+        <NavItem to="/my-profile"
+                 primary="page.myprofile.nav_title"
+                 icon={<AccountCircleIcon/>}
+                 onClick={props.onItemClick}/>
 
-            <NavItem primary="page.myprofile.logout" icon={<ExitToAppIcon/>} onClick={handleLogout}/>
+        <NavItem to="/my-history"
+                 primary="page.myhistory.nav_title"
+                 icon={<HistoryIcon/>}
+                 onClick={props.onItemClick}/>
 
-        </List>
-    </>
+        <NavItem primary="page.myprofile.logout"
+                 icon={<ExitToAppIcon/>}
+                 onClick={handleLogout}/>
+
+    </List>
 }

@@ -75,6 +75,8 @@ export default interface Lang {
             commands: {
                 nav_title: string
                 no_commands: string
+                name_label: string
+                value_label: string
             },
             history: {
                 nav_title: string

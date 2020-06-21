@@ -38,10 +38,6 @@ export function commitDeviceDetailsSet(state: DataT.AppState, object: RemoteObje
 
 export function* fetchDeviceDetailsSaga(action: Action<"DEVICE_DETAILS_REQUEST">) {
     try {
-        yield put(makeAction("DEVICE_DETAILS_SET", {
-            id: action.data,
-            type: "loading"
-        }));
 
         const state: DataT.AppState = yield select();
 

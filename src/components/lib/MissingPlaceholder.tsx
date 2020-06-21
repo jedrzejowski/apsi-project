@@ -1,5 +1,5 @@
 import React from "react";
-import MoodBadIcon from "@material-ui/icons/MoodBad";
+import SmileIcon from "mdi-material-ui/EmoticonSadOutline"
 import Typography from "@material-ui/core/Typography";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import useTranslate from "../../i18n/useTranslate";
@@ -26,7 +26,7 @@ export default function MissingPlaceholder<T>(props: {
 
     return <div className={classes.root}>
         <div>
-            <MoodBadIcon className={classes.icon}/>
+            <SmileIcon className={classes.icon}/>
         </div>
         <Typography variant="h6">
             {translate(props.label)}

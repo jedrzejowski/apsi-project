@@ -121,7 +121,7 @@ export default function MyLayout(props: {
                             <CloseIcon/>
                         </IconButton>
                         <div>
-                            <Navigation onClick={handleDrawerToggle}/>
+                            <Navigation onItemClick={handleDrawerToggle}/>
                         </div>
                     </Drawer>
                 </Hidden>

@@ -12,7 +12,9 @@ import NavItem from "../app/MyNavItem";
 import useTranslate from "../../i18n/useTranslate";
 import RemoteObjectPlaceholder from "../lib/RemoteObjectPlaceholder";
 
-export default function DeviceNavItem() {
+export default function DeviceNavItem(props:{
+    onItemClick?: () => void
+}) {
     const device_list = useDeviceList();
     const translate = useTranslate();
     const [open, setOpen] = useState(true);
@@ -35,6 +37,7 @@ export default function DeviceNavItem() {
             {device_list.type === "data" ? (
                 device_list.data.map((device, i) => {
                     return <NavItem
+                        onClick={props.onItemClick}
                         key={i}
                         depth={1}
                         to={`/device/${device.deviceId}`}

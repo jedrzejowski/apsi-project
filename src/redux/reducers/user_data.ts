@@ -42,10 +42,6 @@ export function commitUserDataUpdating(state: DataT.AppState, updating?: boolean
 
 export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
     try {
-        yield put(makeAction("USER_DATA_SET", {
-            id: action.data.username,
-            type: "loading"
-        }));
 
         const {password, username} = action.data;
 
@@ -227,10 +223,6 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
 
 export function* fetchUserRegisterSaga(action: Action<"USER_REGISTER">) {
     try {
-        yield put(makeAction("USER_DATA_SET", {
-            id: action.data.username,
-            type: "loading"
-        }));
 
         const registration_data = action.data;
 

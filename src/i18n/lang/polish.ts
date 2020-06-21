@@ -74,7 +74,9 @@ export default {
             },
             commands: {
                 nav_title: "Komendy",
-                no_commands: "Brak komend"
+                no_commands: "Brak komend",
+                name_label: "Nazwa:",
+                value_label: "Wartość:"
             },
             history: {
                 nav_title: "Historia"
