@@ -15,6 +15,11 @@ function translate(lang: Lang, id: string) {
 
 export default function () {
     const {language} = React.useContext(LanguageContext);
+    const t = (id: string) => translate(language, id);
 
-    return (id: string) => translate(language, id);
+    t.dateToString = language.convert.dateToString;
+    t.timeToString = language.convert.timeToString;
+    t.timestampToString = language.convert.timestampToString;
+
+    return t;
 }

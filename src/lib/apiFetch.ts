@@ -1,13 +1,15 @@
-import {DataT} from "../types";
 import encodeQueryData from "./encodeQueryData";
 
+type HtmlMethod = "GET" | "PUT" | "POST" | "DELETE";
+
 export default function apiFetch(args: {
-    method: "GET" | "PUT" | "POST",
+    method: HtmlMethod,
     url: string,
+    body?: any,
     params?: any,
     headers?: any
 }) {
-    const url = `${location.origin}/api${args.url}?${encodeQueryData(args.params)}`;
+    const url = `${location.origin}/api${args.url}?${encodeQueryData(args.params ?? {})}`;
 
     return fetch(url, {
         method: args.method,
@@ -15,6 +17,18 @@ export default function apiFetch(args: {
             Accept: "*/*",
             ...(args.headers ?? {})
         }),
-        cache: "no-cache"
+        cache: "no-cache",
+        body: args.body
+    })
+}
+
+apiFetch.jsonBody = function (method: Exclude<HtmlMethod, "GET">, url: string, body: any) {
+    return apiFetch({
+        method,
+        url,
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(body)
     })
 }

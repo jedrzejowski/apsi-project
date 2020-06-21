@@ -1,14 +1,9 @@
 import React from "react";
-import Toolbar from "@material-ui/core/Toolbar";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import makeStyles from "@material-ui/core/styles/makeStyles";
-import Typography from "@material-ui/core/Typography";
-import DeleteButton from "../lib/DeleteButton";
 import useTranslate from "../../i18n/useTranslate";
 import {useDeviceDetails} from "../../redux/reducers/device_details";
 import {nbsp} from "../../const";
 import SliceOfBread from "../app/SliceOfBread";
-import Title from "../app/Title";
 
 const useStyle = makeStyles(theme => ({
     device_name: {
@@ -25,20 +20,11 @@ export default function DeviceDetails(props: {
     const device_details = useDeviceDetails(props.deviceId);
 
     if (!device_details) {
-        return <CircularProgress/>
+        throw new Error();
     }
 
     return <div>
-        <SliceOfBread label={device_details?.name ?? ""}/>
-
-        <Toolbar className={classes.device_name}>
-            <Typography variant="h6" gutterBottom className={classes.device_name}>
-                {device_details?.name ?? ""}
-            </Typography>
-            <DeleteButton confirmMessage="page.device.delete_btn.confirm">
-                {translate("page.device.delete_btn.label")}
-            </DeleteButton>
-        </Toolbar>
+        <SliceOfBread label="page.device.details.nav_title"/>
 
         {JSON.stringify(device_details, null, 4)
             .replace(/ /g, nbsp)

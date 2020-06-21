@@ -80,19 +80,19 @@ export default function UserDataTable() {
             <Table>
                 <TableHead>
                     <TableRow>
-                        <TableCell align="left">{translate("page.profile.name_of_field")}</TableCell>
-                        <TableCell align="right">{translate("page.profile.value_of_field")}</TableCell>
+                        <TableCell align="left">{translate("page.myprofile.name_of_field")}</TableCell>
+                        <TableCell align="right">{translate("page.myprofile.value_of_field")}</TableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
                     <EditableValue
-                        name="page.profile.first_name"
+                        name="page.myprofile.first_name"
                         value={first_name} onChange={setFirstName} edit={editing}/>
                     <EditableValue
-                        name="page.profile.last_name"
+                        name="page.myprofile.last_name"
                         value={last_name} onChange={setLastName} edit={editing}/>
                     <EditableValue
-                        name="page.profile.authorization_token"
+                        name="page.myprofile.authorization_token"
                         value={authorization_token} onChange={setAuthorizationToken} edit={editing}/>
                 </TableBody>
             </Table>
@@ -101,17 +101,17 @@ export default function UserDataTable() {
         <Toolbar classes={{root: classes.toolbar}}>
 
             {editing ? <Button variant="contained" color="secondary" onClick={handleCancelEditing}>
-                {translate("page.profile.cancel_edit")}
+                {translate("page.myprofile.cancel_edit")}
             </Button> : null}
 
             <div className={classes.expander}/>
 
             {!editing ? <Button variant="contained" color="primary" onClick={handleStartEditing}>
-                {translate("page.profile.start_edit")}
+                {translate("page.myprofile.start_edit")}
             </Button> : null}
 
             {editing ? <Button variant="contained" color="primary" onClick={handleSaveChanges}>
-                {translate("page.profile.save_changes")}
+                {translate("page.myprofile.save_changes")}
             </Button> : null}
 
         </Toolbar>

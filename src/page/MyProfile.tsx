@@ -7,7 +7,7 @@ import Container from "@material-ui/core/Container";
 import Avatar from "@material-ui/core/Avatar";
 import {useUserData} from "../redux/reducers/user_data";
 import Typography from "@material-ui/core/Typography";
-import UserDataTable from "../components/profile/UserDataTable";
+import UserDataTable from "../components/user/UserDataTable";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,7 +46,7 @@ export default function MyProfile() {
 
     return (
         <div>
-            <SliceOfBread label={translate("page.profile.nav_title")}/>
+            <SliceOfBread label={translate("page.myprofile.nav_title")}/>
 
             <Container maxWidth="md">
                 <Grid container spacing={3}>

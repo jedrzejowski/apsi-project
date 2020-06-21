@@ -10,6 +10,7 @@ import DevicesOtherIcon from '@material-ui/icons/DevicesOther'
 import {useDeviceList} from "../../redux/reducers/device_list";
 import NavItem from "../app/MyNavItem";
 import useTranslate from "../../i18n/useTranslate";
+import RemoteObjectPlaceholder from "../lib/RemoteObjectPlaceholder";
 
 export default function DeviceNavItem() {
     const device_list = useDeviceList();
@@ -31,14 +32,16 @@ export default function DeviceNavItem() {
 
         <Collapse in={open} timeout="auto" unmountOnExit>
 
-            {device_list?.map((device, i) => {
-                return <NavItem
-                    key={i}
-                    depth={1}
-                    to={`/device/${device.deviceId}`}
-                    primary={device.name}
-                    icon={<DeviceIcon deviceId={device.deviceId}/>}/>
-            })}
+            {device_list.type === "data" ? (
+                device_list.data.map((device, i) => {
+                    return <NavItem
+                        key={i}
+                        depth={1}
+                        to={`/device/${device.deviceId}`}
+                        primary={device.name}
+                        icon={<DeviceIcon deviceId={device.deviceId}/>}/>
+                })
+            ) : (<RemoteObjectPlaceholder object={device_list}/>)}
 
         </Collapse>
     </>

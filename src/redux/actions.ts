@@ -7,12 +7,20 @@ export interface Actions {
     USER_DATA_SET: RemoteObject<DataT.UserData>
     USER_DATA_UPDATE: DataT.UserData
     USER_DATA_UPDATING_SET: boolean | undefined
+    USER_HISTORY_REQUEST: string
+    USER_HISTORY_SET: RemoteObject<DataT.HistoryEntry[]>
 
     DEVICE_LIST_REQUEST: undefined
-    DEVICE_LIST_SET: DataT.DeviceShort[]
-
+    DEVICE_LIST_SET: RemoteObject<DataT.DeviceShort[]>
     DEVICE_DETAILS_REQUEST: string
-    DEVICE_DETAILS_SET: DataT.DeviceDetails
+    DEVICE_DETAILS_SET: RemoteObject<DataT.DeviceDetails>
+    DEVICE_HISTORY_REQUEST: string
+    DEVICE_HISTORY_SET: RemoteObject<DataT.HistoryEntry[]>
+    DEVICE_COMMAND_REQUEST: DataT.DeviceCommandRequest
+
+    CAPABILITIES_TILES_REQUEST: string
+    CAPABILITIES_TILES_SET: RemoteObject<DataT.CapabilityTile[]>
+
 
     NOTIFICATION_ADD: DataT.Notification
     NOTIFICATION_REMOVE: string

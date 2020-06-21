@@ -15,7 +15,11 @@ export default function DeviceIcon(props: {
 }) {
     const device = useDeviceShort(props.deviceId);
 
-    switch (device?.dth.deviceTypeName) {
+    if (device.type !== "data") {
+        return <DeviceUnknownIcon/>
+    }
+
+    switch (device.data?.dth.deviceTypeName) {
         case "Simulated Switch":
             return <ToggleOnIcon/>
         case "Simulated Temperature Sensor":

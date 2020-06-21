@@ -17,13 +17,22 @@ export default {
         delete_btn: {
             accept: "Delete",
             dismiss: "Cancel"
+        },
+        history_table: {
+            no_entries: "No entries",
+            table_header: {
+                command: "Command",
+                device: "Device",
+                timestamp: "Time stamp",
+                user: "Username"
+            }
         }
     },
     page: {
         dashboard: {
             nav_title: "Dashboard"
         },
-        profile: {
+        myprofile: {
             nav_title: "My Profile",
             name_of_field: "Field",
             value_of_field: "Value",
@@ -34,6 +43,9 @@ export default {
             cancel_edit: "Cancel",
             save_changes: "Save",
             logout: "Logout"
+        },
+        myhistory: {
+            nav_title: "My History"
         },
         login: {
             sign_invite: "Sign in",
@@ -57,13 +69,28 @@ export default {
         },
         device: {
             nav_group_label: "Devices",
+            details: {
+                nav_title: "Details"
+            },
+            commands: {
+                nav_title: "Commands",
+                no_commands: "No commands"
+            },
+            history: {
+                nav_title: "History"
+            },
             delete_btn: {
                 label: "Delete device",
                 confirm: "Are u sure to delete device?"
             }
         },
     },
-    error_msg: {
+    notification_msg: {
         message_send_fail: "Error during message send"
+    },
+    convert: {
+        dateToString: (date) => date + "",
+        timeToString: (date) => date + "",
+        timestampToString: (date) => date + "",
     }
 } as Lang;

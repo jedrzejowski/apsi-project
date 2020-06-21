@@ -3,19 +3,20 @@ export type Dictionary<T> = { [key: string]: T }
 export type NotificationLevel = "info" | "error" | "warning" | "success";
 
 export type RemoteObject<T> =
-    { readonly type: "loading" } |
-    { readonly type: "error", readonly error: any } |
-    { readonly type: "data", readonly data: T };
+    { id: string, type: "loading" } |
+    { id: string, type: "error", error: any } |
+    { id: string, type: "data", data: T };
 
 declare namespace DataT {
     interface AppState {
         user_data?: RemoteObject<UserData>,
         user_data_updating?: boolean
+        user_history?: Dictionary<RemoteObject<HistoryEntry[]>>
 
-        current_page?: { type: string, id: string }
-
-        device_list?: DeviceShort[]
-        device_map?: Dictionary<DeviceDetails>
+        device_list?: RemoteObject<DeviceShort[]>
+        device_details?: Dictionary<RemoteObject<DeviceDetails>>
+        device_history?: Dictionary<RemoteObject<HistoryEntry[]>>
+        capabilities_tiles?: Dictionary<RemoteObject<CapabilityTile[]>>
 
         next_notification_id?: number
         notification_dictionary?: Dictionary<Notification>
@@ -29,10 +30,6 @@ declare namespace DataT {
         last_name: string
     }
 
-    interface RegistrationData extends UserData {
-        password: string
-    }
-
     interface Notification {
         content: string
         level: NotificationLevel
@@ -44,6 +41,7 @@ declare namespace DataT {
         name: string
         label: string,
         dth: DeviceType
+        presentInApp: boolean
     }
 
     interface DeviceDetails {
@@ -55,21 +53,8 @@ declare namespace DataT {
                 id: string
             }
         },
-        childDevices: [
-            null
-        ],
-        components: [
-            {
-                capabilities: [
-                    {
-                        id: string,
-                        version: string
-                    }
-                ],
-                id: string,
-                label: string
-            }
-        ],
+        childDevices: [null],
+        components: DeviceComponent[]
         deviceManufacturerCode: string,
         deviceNetworkType: string,
         deviceTypeId: string,
@@ -85,6 +70,15 @@ declare namespace DataT {
         type: string
     }
 
+    interface DeviceComponent {
+        id: string
+        label: string
+        capabilities: {
+            id: string,
+            version: string
+        }[]
+    }
+
     interface DeviceType {
         completedSetup: boolean,
         deviceNetworkType: string,
@@ -94,17 +88,35 @@ declare namespace DataT {
         networkSecurityLevel: string
     }
 
-    type DeviceAttribute = DeviceAttributeEnum
+    interface CapabilityTile {
+        attributes: DeviceCapabilityAttribute[]
+        commands: DeviceCapabilityCommand[]
+    }
 
-    interface DeviceAttributeEnum {
+    interface DeviceCapabilityAttribute {
         name: string,
-        type: "enum",
+        value: string,
         possibleValues: string[]
     }
 
-    interface DeviceCommand {
+    interface DeviceCapabilityCommand {
         name: string
         arguments: any[]
+    }
+
+    interface DeviceCommandRequest {
+        device_id: string
+        component_id: string
+        capability_name: string
+        command_name: string
+        arguments: any[]
+    }
+
+    interface HistoryEntry {
+        command: string,
+        device: string,
+        timestamp: string,
+        user: string
     }
 }
 

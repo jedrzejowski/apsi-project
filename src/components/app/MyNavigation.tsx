@@ -3,6 +3,7 @@ import List from "@material-ui/core/List";
 import Divider from "@material-ui/core/Divider";
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import HistoryIcon from '@material-ui/icons/History';
 import DeviceNavItem from "../device/DeviceNavItem";
 import NavItem from "./MyNavItem";
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -32,9 +33,10 @@ export default function (props: {
 
             <Divider/>
 
-            <NavItem to="/my-profile" primary="page.profile.nav_title" icon={<AccountCircleIcon/>}/>
+            <NavItem to="/my-profile" primary="page.myprofile.nav_title" icon={<AccountCircleIcon/>}/>
+            <NavItem to="/my-history" primary="page.myhistory.nav_title" icon={<HistoryIcon/>}/>
 
-            <NavItem primary="page.profile.logout" icon={<ExitToAppIcon/>} onClick={handleLogout}/>
+            <NavItem primary="page.myprofile.logout" icon={<ExitToAppIcon/>} onClick={handleLogout}/>
 
         </List>
     </>

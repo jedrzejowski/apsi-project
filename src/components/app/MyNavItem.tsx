@@ -1,6 +1,6 @@
-import React, {MouseEventHandler} from "react";
+import React from "react";
 import useTranslate from "../../i18n/useTranslate";
-import {useLocation} from "react-router-dom";
+import {useRouteMatch} from "react-router-dom";
 import AppLink from "../lib/AppLink";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
@@ -16,7 +16,7 @@ export default function NavItem(props: {
 }) {
     const theme = useTheme();
     const translate = useTranslate();
-    const location = useLocation();
+    const match = useRouteMatch(props.to ?? "");
 
     const primary = typeof props.primary === "string" ? translate(props.primary) : props.primary;
 
@@ -24,7 +24,7 @@ export default function NavItem(props: {
         <AppLink to={props.to ?? "#"} color="inherit">
             <ListItem
                 onClick={props.onClick}
-                selected={location.pathname === props.to}
+                selected={match?.path === props.to}
                 style={{
                     paddingLeft: theme.spacing(((props.depth ?? 0) + 1) * 2)
                 }}>

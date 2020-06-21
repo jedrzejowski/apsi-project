@@ -4,18 +4,22 @@ import {commitDeviceListSet} from "./reducers/device_list";
 import {commitDeviceDetailsSet} from "./reducers/device_details";
 import {commitUserData, commitUserDataUpdating} from "./reducers/user_data";
 import {commitNotificationAdd} from "./reducers/notifications";
+import {commitCapabilitiesTilesSet} from "./reducers/capabilities_tiles";
+import {commitDeviceHistorySet} from "./reducers/device_history";
+import {commitUserHistorySet} from "./reducers/user_history";
 
 const initial_state: DataT.AppState = {
-    // user_data: {
-    //     data: {
-    //         authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6",
-    //         first_name: "Janusz",
-    //         last_name: "Kowalski",
-    //         password: "123456",
-    //         username: "test3",
-    //     },
-    //     type: "data"
-    // }
+    user_data: {
+        id: "test3",
+        data: {
+            authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6",
+            first_name: "Janusz",
+            last_name: "Kowalski",
+            password: "123456",
+            username: "test3"
+        },
+        type: "data"
+    }
 };
 
 const commit_dictionary: {
@@ -24,8 +28,14 @@ const commit_dictionary: {
     USER_LOGOUT: () => initial_state,
     USER_DATA_SET: commitUserData,
     USER_DATA_UPDATING_SET: commitUserDataUpdating,
+    USER_HISTORY_SET: commitUserHistorySet,
+
     DEVICE_LIST_SET: commitDeviceListSet,
     DEVICE_DETAILS_SET: commitDeviceDetailsSet,
+    DEVICE_HISTORY_SET: commitDeviceHistorySet,
+
+    CAPABILITIES_TILES_SET: commitCapabilitiesTilesSet,
+
     NOTIFICATION_ADD: commitNotificationAdd
 }
 
@@ -39,6 +49,8 @@ export default function myApp<Key extends keyof Actions>(
         // @ts-ignore
         state = commit(state, action.data);
     }
+
+    console.log(state);
 
     return state;
 }

@@ -17,13 +17,22 @@ export default {
         delete_btn: {
             dismiss: "Anuluj",
             accept: "Usuń"
+        },
+        history_table: {
+            no_entries: "Brak wpisów",
+            table_header: {
+                command: "Komenda",
+                device: "Urządzenie",
+                timestamp: "Czas",
+                user: "Nazwa użytkownika"
+            }
         }
     },
     page: {
         dashboard: {
             nav_title: "Pulpit"
         },
-        profile: {
+        myprofile: {
             nav_title: "Mój profil",
             name_of_field: "Pole",
             value_of_field: "Wartość",
@@ -34,6 +43,9 @@ export default {
             cancel_edit: "Anuluj",
             save_changes: "Zapisz",
             logout: "Wyloguj się"
+        },
+        myhistory: {
+            nav_title: "Moja historia"
         },
         login: {
             sign_invite: "Zaloguj się",
@@ -57,13 +69,28 @@ export default {
         },
         device: {
             nav_group_label: "Urządzenia",
+            details: {
+                nav_title: "Szczegóły"
+            },
+            commands: {
+                nav_title: "Komendy",
+                no_commands: "Brak komend"
+            },
+            history: {
+                nav_title: "Historia"
+            },
             delete_btn: {
                 confirm: "Czy na pewno chcesz usunąć urządzenie?",
                 label: "Usuń urządzenie",
             }
         },
     },
-    error_msg: {
+    notification_msg: {
         message_send_fail: "Błąd wysyłania wiadomości"
+    },
+    convert: {
+        dateToString: (date) => date + "",
+        timeToString: (date) => date + "",
+        timestampToString: (date) => date + "",
     }
 } as Lang;

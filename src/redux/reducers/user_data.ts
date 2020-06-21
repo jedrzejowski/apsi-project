@@ -4,12 +4,18 @@ import {Action, makeAction} from "../actions";
 import {call, put, select, all} from "redux-saga/effects";
 import apiFetch from "../../lib/apiFetch";
 
-function userDataSelector(state: DataT.AppState) {
+export function userDataSelector(state: DataT.AppState) {
     return state.user_data ?? null;
 }
 
 function userDataUpdatingSelector(state: DataT.AppState) {
     return state.user_data_updating ?? false;
+}
+
+export function authorizationTokenSelector(state: DataT.AppState): string | null {
+    if (state.user_data?.type === "data")
+        return state.user_data.data.authorization_token;
+    return null;
 }
 
 export function useUserData() {
@@ -36,22 +42,25 @@ export function commitUserDataUpdating(state: DataT.AppState, updating?: boolean
 
 export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
     try {
-        yield put(makeAction("USER_DATA_SET", {type: "loading"}));
+        yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
+            type: "loading"
+        }));
+
         const {password, username} = action.data;
 
         if (username === "" || password === "") {
-            yield put(makeAction("USER_DATA_SET", {type: "error", error: null}));
+            yield put(makeAction("USER_DATA_SET", {
+                id: action.data.username,
+                type: "error",
+                error: null
+            }));
             return
         }
 
-        let response = yield call(() => apiFetch({
-            method: "GET",
-            url: "/users/login",
-            params: {
-                login: username,
-                password
-            }
-        }));
+        let response = yield call(() => apiFetch.jsonBody(
+            "POST", "/users/login", {login: username, password}
+        ));
 
         if (response.status !== 200) {
             throw new Error();
@@ -60,14 +69,12 @@ export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
         let data: any = yield call(() => response.json());
         const authorization_token = data.token;
 
-        response = yield call(() => apiFetch({
-            method: "GET",
-            url: "/users/info",
-            params: {
+        response = yield call(() => apiFetch.jsonBody(
+            "POST", "/users/info", {
                 login: username,
                 token: authorization_token
             }
-        }));
+        ));
 
         if (response.status !== 200) {
             throw new Error();
@@ -81,6 +88,7 @@ export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
         } = data;
 
         yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
             type: "data",
             data: {
                 username,
@@ -95,12 +103,17 @@ export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
 
         yield put(
             makeAction("NOTIFICATION_ADD", {
-                content: "error_msg.user_credentials_fail",
-                level: "error"
+                content: "notification_msg.user_credentials_fail",
+                level: "error",
+                data: error
             })
         );
 
-        yield put(makeAction("USER_DATA_SET", {type: "error", error}));
+        yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
+            type: "error",
+            error
+        }));
     }
 }
 
@@ -124,19 +137,14 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
             new_user_data.last_name !== old_user_data.last_name ||
             new_user_data.first_name !== old_user_data.first_name
         ) {
-            const response = yield call(() => apiFetch({
-                method: "PUT",
-                url: "/users/update/info",
-                params: {
+            const response = yield call(() => apiFetch.jsonBody(
+                "PUT", "/users/update/info", {
                     login: current_data.username,
                     name: new_user_data.first_name,
                     surname: new_user_data.last_name,
                     token: current_data.authorization_token
-                },
-                headers: {
-                    Accept: "text/plain;charset=UTF-8"
                 }
-            }));
+            ));
 
             if (response.status !== 200) {
                 throw new Error();
@@ -147,22 +155,24 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
             current_data.first_name = new_user_data.first_name;
             current_data.last_name = new_user_data.last_name;
 
-            yield put(makeAction("USER_DATA_SET", {type: "data", data: current_data}));
+            yield put(makeAction("USER_DATA_SET", {
+                id: action.data.username,
+                type: "data",
+                data: current_data
+            }));
         }
 
         // zmiana hasła
 
         if (old_user_data.password !== new_user_data.password) {
 
-            const response = yield call(() => apiFetch({
-                method: "PUT",
-                url: "/users/update/password",
-                params: {
+            const response = yield call(() => apiFetch.jsonBody(
+                "PUT", "/users/update/password", {
                     login: current_data.username,
                     password: new_user_data.password,
                     token: current_data.authorization_token,
-                },
-            }));
+                }
+            ));
 
             if (response.status !== 200) {
                 throw new Error();
@@ -170,22 +180,24 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
 
             current_data.password = new_user_data.password;
 
-            yield put(makeAction("USER_DATA_SET", {type: "data", data: current_data}));
+            yield put(makeAction("USER_DATA_SET", {
+                id: action.data.username,
+                type: "data",
+                data: current_data
+            }));
         }
 
         // zmiana tokenu
 
         if (old_user_data.authorization_token !== new_user_data.authorization_token) {
 
-            const response = yield call(() => apiFetch({
-                method: "PUT",
-                url: "/users/update/token",
-                params: {
+            const response = yield call(() => apiFetch.jsonBody(
+                "PUT", "/users/update/token", {
                     login: current_data.username,
                     password: current_data.password,
                     token: new_user_data.authorization_token,
-                },
-            }));
+                }
+            ));
 
             if (response.status !== 200) {
                 throw new Error();
@@ -193,14 +205,18 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
 
             current_data.authorization_token = new_user_data.authorization_token;
 
-            yield put(makeAction("USER_DATA_SET", {type: "data", data: current_data}));
+            yield put(makeAction("USER_DATA_SET", {
+                id: action.data.username,
+                type: "data",
+                data: current_data
+            }));
         }
 
     } catch (error) {
 
         yield put(
             makeAction("NOTIFICATION_ADD", {
-                content: "error_msg.user_data_update_failed",
+                content: "notification_msg.user_data_update_failed",
                 level: "error"
             })
         );
@@ -211,7 +227,11 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
 
 export function* fetchUserRegisterSaga(action: Action<"USER_REGISTER">) {
     try {
-        yield put(makeAction("USER_DATA_SET", {type: "loading"}));
+        yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
+            type: "loading"
+        }));
+
         const registration_data = action.data;
 
         if (
@@ -221,14 +241,18 @@ export function* fetchUserRegisterSaga(action: Action<"USER_REGISTER">) {
             registration_data.last_name === "" ||
             registration_data.first_name === ""
         ) {
-            yield put(makeAction("USER_DATA_SET", {type: "error", error: null}));
+            yield put(makeAction("USER_DATA_SET", {
+                id: action.data.username,
+                type: "error",
+                error: null
+            }));
             return
         }
 
         const response = yield call(() => apiFetch({
             method: "POST",
             url: "/users/create",
-            params: {
+            body: {
                 login: registration_data.username,
                 name: registration_data.first_name,
                 password: registration_data.password,
@@ -256,11 +280,15 @@ export function* fetchUserRegisterSaga(action: Action<"USER_REGISTER">) {
 
         yield put(
             makeAction("NOTIFICATION_ADD", {
-                content: "error_msg.registration_fail",
+                content: "notification_msg.registration_fail",
                 level: "error"
             })
         );
 
-        yield put(makeAction("USER_DATA_SET", {type: "error", error}));
+        yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
+            type: "error",
+            error
+        }));
     }
 }

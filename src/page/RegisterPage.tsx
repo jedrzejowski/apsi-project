@@ -55,7 +55,7 @@ export default function RegisterPage() {
 
         if (password1 !== password2) {
             dispatch("NOTIFICATION_ADD", {
-                content:"error_msg.registration.password_mismatch",
+                content:"notification_msg.registration.password_mismatch",
                 level: "error"
             })
             return;
