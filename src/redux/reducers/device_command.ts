@@ -31,7 +31,7 @@ export function* fetchDeviceCommandRequestSaga(action: Action<"DEVICE_COMMAND_RE
             },
             body: JSON.stringify({
                 commands: [{
-                    component: command_request.component_id,
+                    component: "main",
                     capability: command_request.capability_name,
                     command: command_request.command_name,
                     arguments: command_request.arguments,
@@ -42,7 +42,7 @@ export function* fetchDeviceCommandRequestSaga(action: Action<"DEVICE_COMMAND_RE
 
         yield put(makeAction("DEVICE_CAPABILITIES_STATUS_REQUEST", {
             device_id: command_request.device_id,
-            capability_id: command_request.capability_name
+            capability_name: command_request.capability_name
         }));
 
         if (response.status !== 200) {

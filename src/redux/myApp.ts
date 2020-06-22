@@ -10,17 +10,17 @@ import {commitUserHistorySet} from "./reducers/user_history";
 import {commitDevicesCapabilityStatusSet} from "./reducers/devices_capability_status";
 
 const initial_state: DataT.AppState = {
-    user_data: {
-        id: "test3",
-        data: {
-            authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6",
-            first_name: "Janusz",
-            last_name: "Kowalski",
-            password: "123456",
-            username: "test3"
-        },
-        type: "data"
-    }
+    // user_data: {
+    //     id: "test3",
+    //     data: {
+    //         authorization_token: "Bearer 3fe718bb-ea6e-485a-901a-042799f279d6",
+    //         first_name: "Janusz",
+    //         last_name: "Kowalski",
+    //         password: "123456",
+    //         username: "test3"
+    //     },
+    //     type: "data"
+    // }
 };
 
 const commit_dictionary: {

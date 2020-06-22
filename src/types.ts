@@ -91,6 +91,7 @@ declare namespace DataT {
     }
 
     interface CapabilityTile {
+        capabilityName: string
         attributes: DeviceCapabilityAttribute[]
         commands: DeviceCapabilityCommand[]
     }
@@ -108,7 +109,6 @@ declare namespace DataT {
 
     interface DeviceCommandRequest {
         device_id: string
-        component_id: string
         capability_name: string
         command_name: string
         arguments: any[]
@@ -122,7 +122,9 @@ declare namespace DataT {
     }
 
     interface DeviceCapabilityStatus {
-        value: string
+        [attribute_name: string]: {
+            value: string
+        }
     }
 }
 
