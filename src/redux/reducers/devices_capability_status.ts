@@ -13,15 +13,15 @@ export function devicesCapabilityStatusSelector(state: DataT.AppState,
     return state.devices_capability_status?.[`${device_id}:${capability_id}`] ?? null
 }
 
-export function useDevicesCapabilityStatus(device_id: string, capability_id: string): ObjectType {
+export function useDevicesCapabilityStatus(device_id: string, capability_name: string): ObjectType {
     const dispatch = useAppDispatch();
-    const devices_capability_status = useAppSelector(state => devicesCapabilityStatusSelector(state, device_id, capability_id));
+    const devices_capability_status = useAppSelector(state => devicesCapabilityStatusSelector(state, device_id, capability_name));
 
     if (!devices_capability_status) {
-        dispatch("DEVICE_CAPABILITIES_STATUS_REQUEST", {device_id, capability_id});
+        dispatch("DEVICE_CAPABILITIES_STATUS_REQUEST", {device_id, capability_name});
 
         return {
-            id: [device_id, capability_id],
+            id: [device_id, capability_name],
             type: "loading"
         };
     }
@@ -41,8 +41,8 @@ export function commitDevicesCapabilityStatusSet(state: DataT.AppState, object: 
 }
 
 export function* fetchDeviceCapabilityStatusRequestSaga(action: Action<"DEVICE_CAPABILITIES_STATUS_REQUEST">) {
-    const {capability_id, device_id} = action.data;
-    const id: [string, string] = [device_id, capability_id];
+    const {capability_name, device_id} = action.data;
+    const id: [string, string] = [device_id, capability_name];
 
     try {
         yield put(makeAction("DEVICE_CAPABILITIES_STATUS_SET", {
@@ -62,7 +62,7 @@ export function* fetchDeviceCapabilityStatusRequestSaga(action: Action<"DEVICE_C
                 "Authorization": user_data.data.authorization_token,
             },
             params: {
-                capabilityId: capability_id,
+                capabilityId: capability_name,
                 deviceId: device_id
             },
         }));
@@ -74,7 +74,7 @@ export function* fetchDeviceCapabilityStatusRequestSaga(action: Action<"DEVICE_C
         const data = yield call(() => response.json());
 
         yield put(makeAction("DEVICE_CAPABILITIES_STATUS_SET", {
-            id, type: "data", data: data[capability_id]
+            id, type: "data", data: data
         }));
     } catch (error) {
 

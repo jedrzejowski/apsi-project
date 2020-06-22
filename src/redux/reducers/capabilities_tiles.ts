@@ -9,20 +9,43 @@ export function capabilitiesTilesSelector(state: DataT.AppState, device_id: stri
     return state.capabilities_tiles?.[device_id] ?? null;
 }
 
-export function useCapabilitiesTiles(device_id: string) :RemoteObject<DataT.CapabilityTile[]>{
+export function useCapabilitiesTiles(device_id: string,): RemoteObject<DataT.CapabilityTile[]> {
     const dispatch = useAppDispatch();
-    const device_details = useAppSelector(state => capabilitiesTilesSelector(state, device_id));
+    let capabilities_tiles = useAppSelector(state => capabilitiesTilesSelector(state, device_id));
 
-    if (!device_details) {
+    if (!capabilities_tiles) {
         dispatch("CAPABILITIES_TILES_REQUEST", device_id);
 
-        return {
+        capabilities_tiles = {
             id: device_id,
             type: "loading"
         };
     }
 
-    return device_details;
+    return capabilities_tiles;
+}
+
+export function useCapabilitiesTile(device_id: string, capability_name: string): RemoteObject<DataT.CapabilityTile, [string, string]> {
+    const capabilities_tiles = useCapabilitiesTiles(device_id);
+    const id: [string, string] = [device_id, capability_name];
+
+    if (capabilities_tiles.type === "data") {
+        let capabilities_tile = capabilities_tiles.data.find(capability_tile => {
+            return capability_tile.capabilityName === capability_name
+        });
+
+        return (capabilities_tile ? {
+            id,
+            type: "data",
+            data: capabilities_tile
+        } : {
+            id,
+            type: "error",
+            error: "not found"
+        })
+    }
+
+    return {...capabilities_tiles, id}
 }
 
 export function commitCapabilitiesTilesSet(state: DataT.AppState, object: RemoteObject<DataT.CapabilityTile[]>): DataT.AppState {

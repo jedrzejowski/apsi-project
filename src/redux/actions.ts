@@ -18,7 +18,7 @@ export interface Actions {
     DEVICE_HISTORY_SET: RemoteObject<DataT.HistoryEntry[]>
     DEVICE_COMMAND_REQUEST: DataT.DeviceCommandRequest
     DEVICE_CAPABILITIES_STATUS_SET: RemoteObject<DataT.DeviceCapabilityStatus, [string, string]>
-    DEVICE_CAPABILITIES_STATUS_REQUEST: { device_id: string, capability_id: string }
+    DEVICE_CAPABILITIES_STATUS_REQUEST: { device_id: string, capability_name: string }
 
     CAPABILITIES_TILES_REQUEST: string
     CAPABILITIES_TILES_SET: RemoteObject<DataT.CapabilityTile[]>
