@@ -33,8 +33,8 @@ export default function DeviceCommands(props: {
 
     if (!device_short.data.presentInApp) {
         return <Box display="flex" flexDirection="column">
-            <Button>
-                {translate("page.device.command.add_to_app")}
+            <Button onClick={handleAddToApp}>
+                {translate("page.device.commands.add_to_app")}
             </Button>
         </Box>
     }
