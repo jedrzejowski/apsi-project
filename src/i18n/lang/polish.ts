@@ -25,7 +25,8 @@ export default {
                 device: "Urządzenie",
                 timestamp: "Czas",
                 user: "Nazwa użytkownika"
-            }
+            },
+            user_title: "Historia użytkownika"
         }
     },
     page: {
@@ -76,7 +77,8 @@ export default {
                 nav_title: "Komendy",
                 no_commands: "Brak komend",
                 name_label: "Nazwa:",
-                value_label: "Wartość:"
+                value_label: "Wartość:",
+                add_to_app: "Dodaj do aplikacji"
             },
             history: {
                 nav_title: "Historia"

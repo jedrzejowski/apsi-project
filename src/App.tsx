@@ -31,9 +31,10 @@ export default function App() {
 
             <MyLayout>
                 <Route path="/device/:deviceId" component={DevicePage}/>
-                <Route exact path="/dashboard" component={Dashboard}/>
-                <Route exact path="/my-profile" component={MyProfile}/>
-                <Route exact path="/my-history" component={MyHistory}/>
+                <Route path="/dashboard" component={Dashboard}/>
+                <Route path="/my-profile" component={MyProfile}/>
+                <Route path="/my-history" component={MyHistory}/>
+                <Route exact path="/" component={Dashboard}/>
 
             </MyLayout>
 

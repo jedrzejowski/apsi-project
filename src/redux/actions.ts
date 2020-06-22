@@ -6,7 +6,6 @@ export interface Actions {
     USER_REGISTER: DataT.UserData
     USER_DATA_SET: RemoteObject<DataT.UserData>
     USER_DATA_UPDATE: DataT.UserData
-    USER_DATA_UPDATING_SET: boolean | undefined
     USER_HISTORY_REQUEST: string
     USER_HISTORY_SET: RemoteObject<DataT.HistoryEntry[]>
 
@@ -19,6 +18,7 @@ export interface Actions {
     DEVICE_COMMAND_REQUEST: DataT.DeviceCommandRequest
     DEVICE_CAPABILITIES_STATUS_SET: RemoteObject<DataT.DeviceCapabilityStatus, [string, string]>
     DEVICE_CAPABILITIES_STATUS_REQUEST: { device_id: string, capability_name: string }
+    DEVICE_ADD_TO_APP_REQUEST: string
 
     CAPABILITIES_TILES_REQUEST: string
     CAPABILITIES_TILES_SET: RemoteObject<DataT.CapabilityTile[]>

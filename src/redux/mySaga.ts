@@ -7,7 +7,7 @@ import {fetchDeviceListSaga} from "./reducers/device_list";
 import {fetchDeviceDetailsSaga} from "./reducers/device_details";
 import {fetchUserDataUpdateSaga, fetchUserLoginSaga, fetchUserRegisterSaga} from "./reducers/user_data";
 import {fetchCapabilitiesTilesSaga} from "./reducers/capabilities_tiles";
-import {fetchDeviceCommandRequestSaga} from "./reducers/device_command";
+import {fetchDeviceAddToAppRequestSaga, fetchDeviceCommandRequestSaga} from "./reducers/device_command";
 import {fetchDeviceHistorySaga} from "./reducers/device_history";
 import {fetchUserHistorySaga} from "./reducers/user_history";
 import {fetchDeviceCapabilityStatusRequestSaga} from "./reducers/devices_capability_status";
@@ -26,6 +26,7 @@ export default function* mySaga() {
     yield takeEvery("DEVICE_COMMAND_REQUEST", fetchDeviceCommandRequestSaga);
     yield takeLeading("DEVICE_HISTORY_REQUEST", fetchDeviceHistorySaga);
     yield takeEvery("DEVICE_CAPABILITIES_STATUS_REQUEST", fetchDeviceCapabilityStatusRequestSaga);
+    yield takeLeading("DEVICE_ADD_TO_APP_REQUEST", fetchDeviceAddToAppRequestSaga);
 
     yield takeEvery("CAPABILITIES_TILES_REQUEST", fetchCapabilitiesTilesSaga);
 }

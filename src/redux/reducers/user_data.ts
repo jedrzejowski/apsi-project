@@ -8,35 +8,14 @@ export function userDataSelector(state: DataT.AppState) {
     return state.user_data ?? null;
 }
 
-function userDataUpdatingSelector(state: DataT.AppState) {
-    return state.user_data_updating ?? false;
-}
-
-export function authorizationTokenSelector(state: DataT.AppState): string | null {
-    if (state.user_data?.type === "data")
-        return state.user_data.data.authorization_token;
-    return null;
-}
-
 export function useUserData() {
     return useAppSelector(userDataSelector);
-}
-
-export function useIsUserDataUpdating() {
-    return useAppSelector(userDataUpdatingSelector);
 }
 
 export function commitUserData(state: DataT.AppState, data: RemoteObject<DataT.UserData>): DataT.AppState {
     return {
         ...state,
         user_data: data
-    }
-}
-
-export function commitUserDataUpdating(state: DataT.AppState, updating?: boolean): DataT.AppState {
-    return {
-        ...state,
-        user_data_updating: updating
     }
 }
 
@@ -53,6 +32,11 @@ export function* fetchUserLoginSaga(action: Action<"USER_LOGIN">) {
             }));
             return
         }
+
+        yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
+            type: "loading"
+        }));
 
         let response = yield call(() => apiFetch.jsonBody(
             "POST", "/users/login", {login: username, password}
@@ -117,7 +101,7 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
     const new_user_data = action.data;
 
     try {
-        yield put(makeAction("USER_DATA_UPDATING_SET", true));
+
         const state: DataT.AppState = yield select();
 
         if (state.user_data?.type !== "data") {
@@ -126,6 +110,13 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
 
         const old_user_data = state.user_data.data;
         let current_data = old_user_data;
+
+        yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
+            type: "data",
+            data: current_data,
+            updating: true
+        }));
 
         // zmiana danych osobowych
 
@@ -154,7 +145,8 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
             yield put(makeAction("USER_DATA_SET", {
                 id: action.data.username,
                 type: "data",
-                data: current_data
+                data: current_data,
+                updating: true
             }));
         }
 
@@ -179,7 +171,8 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
             yield put(makeAction("USER_DATA_SET", {
                 id: action.data.username,
                 type: "data",
-                data: current_data
+                data: current_data,
+                updating: true
             }));
         }
 
@@ -204,9 +197,17 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
             yield put(makeAction("USER_DATA_SET", {
                 id: action.data.username,
                 type: "data",
-                data: current_data
+                data: current_data,
+                updating: true
             }));
         }
+
+        yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
+            type: "data",
+            data: current_data,
+            updating: false
+        }));
 
     } catch (error) {
 
@@ -218,7 +219,6 @@ export function* fetchUserDataUpdateSaga(action: Action<"USER_DATA_UPDATE">) {
         );
     }
 
-    yield put(makeAction("USER_DATA_UPDATING_SET", false));
 }
 
 export function* fetchUserRegisterSaga(action: Action<"USER_REGISTER">) {
@@ -240,6 +240,11 @@ export function* fetchUserRegisterSaga(action: Action<"USER_REGISTER">) {
             }));
             return
         }
+
+        yield put(makeAction("USER_DATA_SET", {
+            id: action.data.username,
+            type: "loading",
+        }));
 
         const response = yield call(() => apiFetch({
             method: "POST",

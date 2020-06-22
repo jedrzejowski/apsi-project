@@ -5,12 +5,14 @@ export type NotificationLevel = "info" | "error" | "warning" | "success";
 export type RemoteObject<T, ID = string> =
     { id: ID, type: "loading" } |
     { id: ID, type: "error", error: any } |
-    { id: ID, type: "data", data: T };
+    {
+        id: ID, type: "data", data: T,
+        updating?: boolean, needUpdate?: boolean
+    }
 
 declare namespace DataT {
     interface AppState {
         user_data?: RemoteObject<UserData>,
-        user_data_updating?: boolean
         user_history?: Dictionary<RemoteObject<HistoryEntry[]>>
 
         device_list?: RemoteObject<DeviceShort[]>
@@ -96,15 +98,26 @@ declare namespace DataT {
         commands: DeviceCapabilityCommand[]
     }
 
-    interface DeviceCapabilityAttribute {
+    type DeviceCapabilityAttribute = DeviceCapabilityAttributeEnum | DeviceCapabilityAttributeInteger;
+
+    interface DeviceCapabilityAttributeEnum {
+        type: "switch"
         name: string,
         value: string,
         possibleValues: string[]
     }
 
+    interface DeviceCapabilityAttributeInteger {
+        type: "integer"
+        name: string
+        maximum: number
+        minimum: number
+        value: number
+    }
+
     interface DeviceCapabilityCommand {
         name: string
-        arguments: any[]
+        arguments: string[]
     }
 
     interface DeviceCommandRequest {

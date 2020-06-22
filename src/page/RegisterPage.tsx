@@ -1,7 +1,6 @@
 import React, {UIEvent, useState} from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -15,6 +14,7 @@ import useTranslate from "../i18n/useTranslate";
 import AppLink from "../components/lib/AppLink";
 import useAppDispatch from "../hooks/useAppDispatch";
 import {useUserData} from "../redux/reducers/user_data";
+import LoadingDialog from "../components/lib/LoadingDialog";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -55,7 +55,7 @@ export default function RegisterPage() {
 
         if (password1 !== password2) {
             dispatch("NOTIFICATION_ADD", {
-                content:"notification_msg.registration.password_mismatch",
+                content: "notification_msg.registration.password_mismatch",
                 level: "error"
             })
             return;
@@ -70,9 +70,8 @@ export default function RegisterPage() {
         })
     }
 
-    return (
+    return (<>
         <Container component="main" maxWidth="xs">
-            <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
                     <LockOutlinedIcon/>
@@ -185,5 +184,6 @@ export default function RegisterPage() {
             </Box>
 
         </Container>
-    );
+        <LoadingDialog loading={user_data?.type === "loading"}/>
+    </>);
 }

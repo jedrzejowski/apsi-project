@@ -25,7 +25,8 @@ export default interface Lang {
                 device: string
                 timestamp: string
                 user: string
-            }
+            },
+            user_title: string
         }
     },
     page: {
@@ -77,6 +78,7 @@ export default interface Lang {
                 no_commands: string
                 name_label: string
                 value_label: string
+                add_to_app: string
             },
             history: {
                 nav_title: string

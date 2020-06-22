@@ -2,7 +2,7 @@ import type {Action, Actions} from "./actions";
 import {DataT} from "../types";
 import {commitDeviceListSet} from "./reducers/device_list";
 import {commitDeviceDetailsSet} from "./reducers/device_details";
-import {commitUserData, commitUserDataUpdating} from "./reducers/user_data";
+import {commitUserData} from "./reducers/user_data";
 import {commitNotificationAdd} from "./reducers/notifications";
 import {commitCapabilitiesTilesSet} from "./reducers/capabilities_tiles";
 import {commitDeviceHistorySet} from "./reducers/device_history";
@@ -28,7 +28,6 @@ const commit_dictionary: {
 } = {
     USER_LOGOUT: () => initial_state,
     USER_DATA_SET: commitUserData,
-    USER_DATA_UPDATING_SET: commitUserDataUpdating,
     USER_HISTORY_SET: commitUserHistorySet,
 
     DEVICE_LIST_SET: commitDeviceListSet,

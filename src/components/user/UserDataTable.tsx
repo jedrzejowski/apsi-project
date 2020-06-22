@@ -8,7 +8,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableContainer from "@material-ui/core/TableContainer";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import Toolbar from "@material-ui/core/Toolbar";
-import {useIsUserDataUpdating, useUserData} from "../../redux/reducers/user_data";
+import {useUserData} from "../../redux/reducers/user_data";
 import useTranslate from "../../i18n/useTranslate";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -30,7 +30,6 @@ export default function UserDataTable() {
     const translate = useTranslate();
     const user_data = useUserData();
     const dispatch = useAppDispatch();
-    const is_loading = useIsUserDataUpdating();
     const [editing, setEditing] = useState(false);
 
     if (user_data?.type !== "data") {
@@ -116,7 +115,7 @@ export default function UserDataTable() {
 
         </Toolbar>
 
-        <LoadingDialog loading={is_loading}/>
+        <LoadingDialog loading={!!user_data.updating}/>
     </div>
 }
 

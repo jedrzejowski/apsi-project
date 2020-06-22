@@ -5,7 +5,7 @@ import {select, call, put} from "redux-saga/effects";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
 
-function deviceHistorySelector(state: DataT.AppState, device_id: string) {
+export function deviceHistorySelector(state: DataT.AppState, device_id: string) {
     return state.device_history?.[device_id] ?? null;
 }
 
@@ -19,6 +19,10 @@ export function useDeviceHistory(device_id: string): RemoteObject<DataT.HistoryE
             id: device_id,
             type: "loading"
         };
+    }
+
+    if (device_history.type === "data" && device_history.needUpdate) {
+        dispatch("DEVICE_HISTORY_REQUEST", device_id);
     }
 
     return device_history;

@@ -4,6 +4,7 @@ import {Action, makeAction} from "../actions";
 import {select, call, put} from "redux-saga/effects";
 import useAppDispatch from "../../hooks/useAppDispatch";
 import useAppSelector from "../../hooks/useAppSelector";
+import {userDataSelector} from "./user_data";
 
 function deviceListSelector(state: DataT.AppState) {
     return state.device_list ?? null;
@@ -59,20 +60,18 @@ export function commitDeviceListSet(state: DataT.AppState, data: RemoteObject<Da
 
 export function* fetchDeviceListSaga(action: Action<"DEVICE_LIST_REQUEST">) {
     try {
-        const state: DataT.AppState = yield select();
+        const user_data: ReturnType<typeof userDataSelector> = yield select(userDataSelector);
 
-        if (state.user_data?.type !== "data") {
+        if (user_data?.type !== "data") {
             throw new Error();
         }
-
-        const user_data = state.user_data.data;
 
         const response = yield call(() => apiFetch({
             method: "GET",
             url: "/devices/list",
             params: {},
             headers: {
-                Authorization: user_data.authorization_token
+                Authorization: user_data.data.authorization_token
             }
         }));
 
