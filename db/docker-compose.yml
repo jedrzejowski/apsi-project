@@ -1,0 +1,13 @@
+version: "3.3"
+services:
+
+  psql:
+    image: postgres:12.2
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=DGQuwWmmJTS86r5V
+      - POSTGRES_DB=apsi_smartthings
+    ports:
+      - "6000:5432"
+    expose:
+      - "6000"

@@ -1,5 +1,5 @@
 import configureStore, {MockStoreEnhanced} from "redux-mock-store";
-import {DataT} from "../types";
+import type {DataT} from "../types";
 import {createStore} from "redux";
 import myApp from "./myApp";
 

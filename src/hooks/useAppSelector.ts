@@ -1,4 +1,4 @@
-import {DataT} from "../types";
+import type {DataT} from "../types";
 import {useSelector} from "react-redux";
 
 const useAppSelector = useSelector as <T>(

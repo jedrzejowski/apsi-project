@@ -1,6 +1,8 @@
-import {DataT, RemoteObject} from "../types";
+import type {DataT, RemoteObject} from "../types";
 
 export interface Actions {
+    TIMER: number
+
     USER_LOGIN: { username: string, password: string }
     USER_LOGOUT: undefined
     USER_REGISTER: DataT.UserData

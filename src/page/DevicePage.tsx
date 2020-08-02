@@ -45,7 +45,7 @@ export default function DevicePage(props: {}) {
             </Toolbar>
             <Paper>
                 <NavTab tabs={[
-                    {to: `${match.url}/details`, label: "page.device.details.nav_title"},
+                    // {to: `${match.url}/details`, label: "page.device.details.nav_title"},
                     {to: `${match.url}/commands`, label: "page.device.commands.nav_title"},
                     {to: `${match.url}/history`, label: "page.device.history.nav_title"}
                 ]}/>
@@ -53,10 +53,10 @@ export default function DevicePage(props: {}) {
         </Container>
 
         <Container className={classes.content_root}>
-            <Route exact path={`${match.url}/details`} render={() => <DeviceDetails deviceId={params.deviceId}/>}/>
+            {/*<Route exact path={`${match.url}/details`} render={() => <DeviceDetails deviceId={params.deviceId}/>}/>*/}
             <Route exact path={`${match.url}/commands`} render={() => <DeviceCommands deviceId={params.deviceId}/>}/>
             <Route exact path={`${match.url}/history`} render={() => <DeviceHistory deviceId={params.deviceId}/>}/>
-            <Route exact path={`${match.url}/`} render={() => <DeviceDetails deviceId={params.deviceId}/>}/>
+            <Route exact path={`${match.url}/`} render={() => <DeviceCommands deviceId={params.deviceId}/>}/>
         </Container>
 
     </>

@@ -15,8 +15,11 @@ import {useDevicesCapabilityStatus} from "../../redux/reducers/devices_capabilit
 import DeviceCapabilityTileButton from "./DeviceCapabilityTileButton";
 import DeviceCapabilityTile from "./DeviceCapabilityTile";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {},
+    action_root: {
+        paddingLeft: theme.spacing(2)
+    },
     bullet: {
         display: "inline-block",
         margin: "0 2px",
@@ -28,7 +31,7 @@ const useStyles = makeStyles({
     pos: {
         marginBottom: 12,
     },
-});
+}), {name: "DeviceDashboardItem"});
 
 export default function DeviceDashboardItem(props: {
     deviceId: string
@@ -50,7 +53,7 @@ export default function DeviceDashboardItem(props: {
                 </>) : (<RemoteObjectPlaceholder object={device_short}/>)}
 
             </CardContent>
-            <CardActions>
+            <CardActions className={classes.action_root}>
                 <FirstCapability deviceId={props.deviceId}/>
             </CardActions>
         </Card>

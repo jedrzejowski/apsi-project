@@ -1,5 +1,5 @@
 import type {Action, Actions} from "./actions";
-import {DataT} from "../types";
+import type {DataT} from "../types";
 import {commitDeviceListSet} from "./reducers/device_list";
 import {commitDeviceDetailsSet} from "./reducers/device_details";
 import {commitUserData} from "./reducers/user_data";

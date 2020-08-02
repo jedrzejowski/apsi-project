@@ -11,6 +11,7 @@ import {fetchDeviceAddToAppRequestSaga, fetchDeviceCommandRequestSaga} from "./r
 import {fetchDeviceHistorySaga} from "./reducers/device_history";
 import {fetchUserHistorySaga} from "./reducers/user_history";
 import {fetchDeviceCapabilityStatusRequestSaga} from "./reducers/devices_capability_status";
+import {timerSaga} from "./reducers/timer";
 
 let takeLeading = <Key extends keyof Actions>(name: Key, f: (action: Action<Key>) => any) => takeLeadingSaga(name, f);
 let takeEvery = <Key extends keyof Actions>(name: Key, f: (action: Action<Key>) => any) => takeEverySaga(name, f);
@@ -29,4 +30,6 @@ export default function* mySaga() {
     yield takeLeading("DEVICE_ADD_TO_APP_REQUEST", fetchDeviceAddToAppRequestSaga);
 
     yield takeEvery("CAPABILITIES_TILES_REQUEST", fetchCapabilitiesTilesSaga);
+
+    yield takeLeading("TIMER", timerSaga);
 }

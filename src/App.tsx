@@ -10,6 +10,7 @@ import Dashboard from "./page/Dashboard";
 import MyProfile from "./page/MyProfile";
 import makeStyles from "@material-ui/core/styles/makeStyles";
 import MyHistory from "./page/MyHistory";
+import useAppDispatch from "./hooks/useAppDispatch";
 
 const useStyle = makeStyles({
     "@global": {
@@ -23,7 +24,10 @@ const useStyle = makeStyles({
 
 export default function App() {
     const classes = useStyle();
+    const dispatch = useAppDispatch();
     const user_data = useUserData();
+
+    dispatch("TIMER", 10000);
 
     return <Switch>
 
